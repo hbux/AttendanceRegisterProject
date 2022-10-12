@@ -2,6 +2,8 @@
 
 Looking for [how to run the application locally](#how-to-run-the-attendance-register-project)?
 
+---
+
 ### Table of contents
 1. [Introduction and Task](#introduction-and-task)
 2. [System Design](#system-design)
