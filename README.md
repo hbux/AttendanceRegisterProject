@@ -4,9 +4,9 @@ node_modules folder containing dependency information is gitignored. On your fir
 1. Open AttendanceRegisterProject in VS Code
 2. View > Terminal
 3. Enter `cd backend` inside the terminal to navigate to the backend folder
-4. Enter `npm i express mongoose body-parser` to install required dependencies 
-5. Enter `node app.js` once dependencies have been installed 
-6. Enter `localhost:3000` in the URL of a browser
+    1. Enter `npm i express mongoose body-parser` to install required dependencies 
+    2. Enter `node app.js` once dependencies have been installed 
+4. Enter `localhost:3000` in the URL of a browser
 
 ---
 
@@ -16,7 +16,7 @@ node_modules folder containing dependency information is gitignored. On your fir
     1. [Project Structure](#project-structure)
 3. [How to Run the Attendance Register Project](#how-to-run-the-attendance-register-project)
     1. [Running the Application](#running-the-application)
-    2. [Setting up MongoDB Locally](#setting-up-mongo-locally)
+    2. [Setting up MongoDB Locally](#setting-up-mongodb-locally)
 
 ## Introduction and Task
 In this assessment you will design and build a Web application that makes use of modern application development frameworks and development techniques. You will demonstrate your understanding of the design techniques, architectures and technical opportunities provided by such frameworks. 
