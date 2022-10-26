@@ -3,10 +3,10 @@
 node_modules folder containing dependency information is gitignored. On your first run-through:
 1. Open AttendanceRegisterProject in VS Code
 2. View > Terminal
-3. Enter the following inside the terminal to navigate to the backend folder `cd backend`
-4. Enter the following to install dependencies `npm i express mongoose body-parser`
-5. Once dependencies have been installed, enter `node app.js`
-6. Navigate to a browser, in the URL type `localhost:3000`
+3. Enter `cd backend` inside the terminal to navigate to the backend folder
+4. Enter `npm i express mongoose body-parser` to install required dependencies 
+5. Enter `node app.js` once dependencies have been installed 
+6. Enter `localhost:3000` in the URL of a browser
 
 ---
 
