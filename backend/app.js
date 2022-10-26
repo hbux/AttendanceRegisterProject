@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 // Route dependencies
-const indexRoute = require('./routes/index');
+const indexRoute = require('./routes/indexRoute');
 
 // Db config dependencies
 const db = require('./config/keys').mongoUri;
