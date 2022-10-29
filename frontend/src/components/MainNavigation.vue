@@ -16,7 +16,7 @@
                 </a>
             </div>
             <div class="nav-item px-3">
-                <a class="nav-link" href="/code">
+                <a class="nav-link" href="/registerCode">
                     <span class="oi oi-plus" aria-hidden="true"></span> Register code
                 </a>
             </div>

@@ -1,6 +1,6 @@
 <template>
-    <a href="" target="_blank" class="mx-3">Login</a>
-    <a href="" target="_blank" class="mx-3">Register</a>
+    <a href="/login" class="mx-3">Login</a>
+    <a href="" class="mx-3">Register</a>
 </template>
 
 <script>
