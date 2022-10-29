@@ -2,13 +2,14 @@
 
 Details on how to run the programs for the first time and running the programs normally.
 
+To terminate any of the programs, enter `CTRL + C`
+
 **Backend: First run-through**
 1. Open AttendanceRegisterProject in VS Code
 2. View > Terminal
 3. Enter `cd backend` inside the terminal to navigate to the backend folder
     1. Enter `npm i express mongoose body-parser` to install required dependencies 
     2. Enter `node app.js` once dependencies have been installed 
-    3. To terminate the program, enter `CTRL + C` 
 4. Enter `localhost:3000` in the URL of a browser
 
 ---
@@ -18,22 +19,24 @@ Details on how to run the programs for the first time and running the programs n
 2. Enter `cd backend` if not already inside the backend folder
     1. Enter `node app.js` to run the program
     2. Enter `localhost:3000` in the URL of the browser
-    3. To terminate the program, enter `CTRL + C`
     
 ---
 
 **Frontend: First run-though**
-
-Still working on this...
+1. View > Terminal 
+2. Enter `cd frontend` if not already inside the frontend folder
+    1. Enter `npm install package-lock.json`
+    2. This should install all the required dependencies
+    3. Enter `npm run serve` into the terminal
+    2. Enter `localhost:8080` in the URL of the browser
 
 ---
 
 **Frontend: Running the program**
 1. View > Terminal
-2. Enter `cd frontend` if not already inside the backend folder
+2. Enter `cd frontend` if not already inside the frontend folder
     1. Enter `npm run serve` to run the program
     2. Enter `localhost:8080` in the URL of the browser
-    3. To terminate the program, enter `CTRL + C`
 
 ---
 
