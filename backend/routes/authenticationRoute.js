@@ -8,5 +8,6 @@ const authenticationController = require('../controllers/authenticationControlle
 // Http requests
 router.post('/login', authenticationController.login);
 router.post('/register', authenticationController.register);
+router.post('/role/add', authenticationController.addRole);
 
 module.exports = router;

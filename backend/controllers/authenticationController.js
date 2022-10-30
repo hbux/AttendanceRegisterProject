@@ -95,3 +95,32 @@ exports.register = (req, res) => {
         }
     })
 }
+
+// Adds a role to a user
+exports.addRole = (req, res) => {
+    const { email, roleName } = req.body;
+
+    if (!email || !roleName) {
+        res.status(400).send({ message: 'Please enter all fields.' });
+
+        return;
+    }
+
+    User.findOne({
+        email: email
+    }).then(user => {
+        user.roles.push({
+            roleName: roleName
+        });
+
+        user.save()
+            .then(data => {
+                // Success = 200 status code
+                res.status(200).send({ message: 'Thanks. Role has been added.' });
+            })
+            .catch(error => {
+                // Something went wrong with adding to the database, return bad request
+                res.status(400).send({ message: error });
+            });
+    });
+}

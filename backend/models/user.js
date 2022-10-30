@@ -17,7 +17,12 @@ const User = mongoose.Schema({
     hashedPassword: {
         type: String,
         required: true
-    }
+    },
+    roles: [{
+        roleName: {
+            type: String
+        }
+    }]
 });
 
 const user = mongoose.model('User', User);

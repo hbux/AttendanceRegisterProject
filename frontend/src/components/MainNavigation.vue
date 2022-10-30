@@ -15,7 +15,7 @@
                     <span class="oi oi-home" aria-hidden="true"></span> Home
                 </a>
             </div>
-            <div class="nav-item px-3">
+            <div v-if="isInStudentRole" class="nav-item px-3">
                 <a class="nav-link" href="/registerCode">
                     <span class="oi oi-plus" aria-hidden="true"></span> Register code
                 </a>
@@ -25,8 +25,15 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
+
     export default {
-        name: 'MainNavigation'
+        name: 'MainNavigation',
+        computed: {
+            ...mapGetters({
+                isInStudentRole: 'authenticationModule/isInStudentRole'
+            })
+        },
     }
 </script>
 
