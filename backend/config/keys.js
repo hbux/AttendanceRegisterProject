@@ -1,3 +1,4 @@
 module.exports = {
-    mongoUri: '<insert mongo connection string>'
+    mongoUri: 'mongodb://localhost:27017/attendance',
+    securityKey: 'MyNotSoSecureSecurityKey'
 }
