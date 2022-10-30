@@ -1,6 +1,9 @@
 <template>
     <form name="form" @submit.prevent="handleLogin">
         <div class="container">
+            <div class="mb-4">
+                <h2>Please login</h2>
+            </div>
             <div v-if="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Oops!</strong> {{errorMessage}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

@@ -5,7 +5,6 @@
     </div>
     <div v-else>
         <a href="/login" class="mx-3">Login</a>
-        <a href="/register" class="mx-3">Register</a>
     </div>
 
 </template>

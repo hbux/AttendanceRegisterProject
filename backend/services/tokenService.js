@@ -5,8 +5,7 @@ function createToken(user) {
     // Creates a token based on user details
     var accessToken = jwt.sign({
         id: user.id,
-        email: user.email,
-        roles: user.roles
+        email: user.email
     }, securityKey);
 
     return accessToken;
