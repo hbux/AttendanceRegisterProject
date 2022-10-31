@@ -1,7 +1,8 @@
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 
-const apiUrl = 'http://localhost:3000/authentication/';
+import authenticationService from '../../services/authenticationService'
+
 const user = JSON.parse(localStorage.getItem('user'));
 
 const state = {
@@ -36,9 +37,7 @@ const getters = {
 
 const actions = {
     async loginAction({dispatch }, data) {
-        let urlTarget = apiUrl + 'login';
-
-        const response = await axios.post(urlTarget, data);
+        const response = await authenticationService.loginAsync(data);
 
         return dispatch('attempt', response.data);
     },
@@ -52,6 +51,8 @@ const actions = {
             id: decodedJwt.id,
             roles: decodedJwt.roles
         };
+
+        console.log(user);
 
         commit('SET_USER', user);
     },
