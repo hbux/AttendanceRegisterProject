@@ -12,7 +12,9 @@ function createToken(user) {
     return accessToken;
 }
 
-validateToken = (req, res, next) => {
+
+
+const verifyJwt = (req, res, next) => {
     // This is middleware which is run after routes but before controllers
     // which ensures the user sends a token with their request 
     const authHeader = req.headers['authorization'];
@@ -20,13 +22,13 @@ validateToken = (req, res, next) => {
 
     // If token is not present
     if (!token) {
-        res.status(401).send();
+        return res.status(401).send();
     }
 
     // Third party dependecy to validate the JWT access token
     jwt.verify(token, securityKey, (error, user) => {
         if (error) {
-            res.status(403).send();
+            return res.status(403).send();
         }
 
         req.user = user;
@@ -36,9 +38,31 @@ validateToken = (req, res, next) => {
     });
 }
 
+const verifyRoles = (...allowedRoles) => {
+    // Verifies the user sending the request is in an allowed role
+    return (req, res, next) => {
+        if (!req?.user.roles) {
+            return res.sendStatus(401);
+        }
+
+        const rolesArray = [...allowedRoles];
+        
+        // Checks if the role array includes allowed roles
+        const result = req.user.roles.filter(r => rolesArray.includes(r.roleName)).length > 0;
+
+        if (!result) {
+            return res.sendStatus(401);
+        }
+
+        // Next runs the next function in the http request pipeline
+        next();
+    }
+}
+
 const tokenService = {
     createToken,
-    validateToken
+    verifyJwt,
+    verifyRoles
 };
 
 module.exports = tokenService;

@@ -53,8 +53,6 @@ const actions = {
             roles: decodedJwt.roles
         };
 
-        console.log(user);
-        
         commit('SET_USER', user);
     },
     logoutAction({ commit }) {
@@ -67,11 +65,15 @@ const mutations = {
         state.user = user;
 
         localStorage.setItem('user', JSON.stringify(user));
+
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
     },
     REMOVE_USER(state) {
         state.user = null;
 
         localStorage.removeItem('user');
+
+        axios.defaults.headers.common['Authorization'] = null;
     }
 }
 
