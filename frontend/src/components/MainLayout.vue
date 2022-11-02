@@ -2,7 +2,9 @@
     <div class="page">
         <div class="sidebar">
             <MainNavigation />
-        </div>
+            </div>
+
+       
         <main>
             <div class="top-row px-4">
                 <LoginDisplay />
@@ -16,13 +18,19 @@
 
 <script>
     import MainNavigation from './MainNavigation.vue'
+    
     import LoginDisplay from './LoginDisplay.vue'
+    
+
+    
 
     export default {
         name: 'MainLayout',
         components: {
             MainNavigation,
+            
             LoginDisplay
+            
         }
     }
 </script>
@@ -42,6 +50,9 @@ main {
     /* background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%); */
     background-color: #242424;
 }
+
+
+
 
 .top-row {
     background-color: #f7f7f7;
@@ -88,6 +99,8 @@ main {
         position: sticky;
         top: 0;
     }
+
+     
 
     .top-row {
         position: sticky;

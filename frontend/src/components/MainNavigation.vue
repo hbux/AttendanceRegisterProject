@@ -15,6 +15,20 @@
                     <span class="oi oi-home" aria-hidden="true"></span> Home
                 </a>
             </div>
+
+             <div class="nav-item px-3">
+                <a class="nav-link" href="/Course">
+                    <span class="oi oi-course" ></span> Courses
+                </a>
+            </div>
+
+             <div class="nav-item px-3">
+                <a class="nav-link" href="/Module">
+                    <span class="oi oi-module" ></span> Modules
+                </a>
+            </div>
+
+            
             <div v-if="isInStudentRole" class="nav-item px-3">
                 <a class="nav-link" href="/registerCode">
                     <span class="oi oi-plus" aria-hidden="true"></span> Register code
@@ -22,6 +36,10 @@
             </div>
         </nav>
     </div>
+
+
+ 
+   
 </template>
 
 <script>
