@@ -2,14 +2,14 @@
     <div class="mb-4">
         <h2>Register your attendance.</h2>
     </div>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <!-- <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Success!</strong> Your registration has been submitted.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Oops!</strong> An error occured with your registration code.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    </div> -->
     <form>
         <label for="code" class="form-label">Registration code</label>
         <input type="text" id="code" name="code" class="form-control" aria-describedby="codeHelpBlock">

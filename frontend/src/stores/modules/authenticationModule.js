@@ -41,6 +41,16 @@ const actions = {
 
         return dispatch('attempt', response.data);
     },
+    async registerAction(_, data) {
+        const response = await authenticationService.registerAsync(data);
+
+        return response.data;
+    },
+    async addRoleAction(_, data) {
+        const response = await authenticationService.addRoleAsync(data);
+
+        return response.data;
+    },
     async attempt({ commit }, data) {
         let decodedJwt = jwtDecode(data.access_token);
 

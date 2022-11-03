@@ -74,7 +74,7 @@ exports.register = (req, res) => {
         if (user) {
             res.send('Email already exists.');
         } else {
-            // Creating the new user and hasing the password
+            // Creating the new user and hashing the password
             const user = new User({
                 firstName: firstName,
                 lastName: lastName,

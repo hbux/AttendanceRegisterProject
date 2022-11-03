@@ -8,8 +8,10 @@ const tokenService = require('../services/tokenService')
 const authenticationController = require('../controllers/authenticationController');
 
 // Http requests
+// Verify user is authenticated: tokenService.verifyJwt
+// Verify user is in a role: tokenService.verifyRoles(roles)
 router.post('/login', authenticationController.login);
 router.post('/register', authenticationController.register);
-router.post('/role/add', tokenService.verifyJwt, tokenService.verifyRoles('Admin'), authenticationController.addRole);
+router.post('/role/add', authenticationController.addRole);
 
 module.exports = router;

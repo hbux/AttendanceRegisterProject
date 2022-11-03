@@ -6,7 +6,7 @@
     <div v-else>
         <a href="/login" class="mx-3">Login</a>
     </div>
-
+    <a href="/admin">Admin access</a>
 </template>
 
 <script>
