@@ -72,7 +72,7 @@ exports.register = (req, res) => {
     }).then(user => {
         // If user is found, email already exists
         if (user) {
-            res.send('Email already exists.');
+            res.status(400).send({ message: 'Email already exists.'});
         } else {
             // Creating the new user and hashing the password
             const user = new User({
