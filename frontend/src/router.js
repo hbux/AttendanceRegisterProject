@@ -7,16 +7,14 @@ import Admin from './views/Admin.vue'
 import Course from './views/Course.vue'
 import Module from './views/Module.vue'
 
-
- 
 const routes = [
     {
         path: '/',
-        name: 'home',
+        name: 'HomePage',
         component: Home
     },
     {
-        path: '/registerCode',
+        path: '/code/register',
         name: 'registerCode',
         component: RegisterCode
     },

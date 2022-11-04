@@ -2,9 +2,7 @@
     <div class="page">
         <div class="sidebar">
             <MainNavigation />
-            </div>
-
-       
+        </div>
         <main>
             <div class="top-row px-4">
                 <LoginDisplay />

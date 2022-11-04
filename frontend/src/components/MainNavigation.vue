@@ -2,44 +2,35 @@
     <div class="top-row ps-3 navbar navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="">Attendance System</a>
-            <button title="Navigation menu" class="navbar-toggler">
+            <button title="Navigation menu" class="navbar-toggler" @click="toggleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </div>
-
-    <div class="">
+    <div :class="{ collapse: collapseNavMenu }">
         <nav class="flex-column">
             <div class="nav-item px-3">
-                <a class="nav-link" href="/">
+                <router-link  active-class="active" to="/" class="nav-link">
                     <span class="oi oi-home" aria-hidden="true"></span> Home
-                </a>
+                </router-link>
             </div>
-
              <div class="nav-item px-3">
-                <a class="nav-link" href="/Course">
+                <router-link active-class="active" to="/course" exact class="nav-link">
                     <span class="oi oi-course" ></span> Courses
-                </a>
+                </router-link>
             </div>
-
              <div class="nav-item px-3">
-                <a class="nav-link" href="/Module">
+                <router-link active-class="active" to="/module" exact class="nav-link">
                     <span class="oi oi-module" ></span> Modules
-                </a>
+                </router-link>
             </div>
-
-            
             <div v-if="isInStudentRole" class="nav-item px-3">
-                <a class="nav-link" href="/registerCode">
+                <router-link active-class="active" to="/code/register" exact class="nav-link">
                     <span class="oi oi-plus" aria-hidden="true"></span> Register code
-                </a>
+                </router-link>
             </div>
         </nav>
     </div>
-
-
- 
-   
 </template>
 
 <script>
@@ -47,11 +38,21 @@
 
     export default {
         name: 'MainNavigation',
+        data() {
+            return {
+                collapseNavMenu: true
+            }
+        },
         computed: {
             ...mapGetters({
                 isInStudentRole: 'authenticationModule/isInStudentRole'
             })
         },
+        methods: {
+            toggleNavbar() {
+                this.collapseNavMenu = !this.collapseNavMenu;
+            }
+        }
     }
 </script>
 
@@ -98,8 +99,8 @@
     line-height: 3rem;
 }
 
-.nav-item > a.active {
-    background-color: rgba(255,255,255,0.25);
+.active {
+    background-color: rgba(196, 196, 196, 0.25);
     color: white;
 }
 
@@ -119,7 +120,7 @@
 
     .collapse {
         /* Never collapse the sidebar for wide screens */
-        display: block;
+        display: block !important;
     }
 }
 
