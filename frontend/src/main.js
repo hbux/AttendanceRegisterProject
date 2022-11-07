@@ -4,7 +4,7 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import router from './router'
-import store from './stores/authenticationStore'
+import store from './stores/index';
 
 createApp(App)
     .use(router)

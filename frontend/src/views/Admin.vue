@@ -4,11 +4,11 @@
             <div class="mb-4">
                 <h2>Register a new user</h2>
             </div>
-            <div v-if="registerErrorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div v-if="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Oops!</strong> {{registerErrorMessage}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div v-if="registerSuccessMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+            <div v-if="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Success!</strong> {{registerSuccessMessage}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -32,6 +32,13 @@
                 <input v-model="confirmPassword" type="password" class="form-control" name="confirmPassword" id="floatingCP" placeholder="Confirm Password">
                 <label for="floatingCP">Confirm password</label>
             </div>
+            <div class="my-3">
+            <label for="password" class="form-label">Role of user</label>
+                <select v-model="selectedRole" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option disabled>Choose a role</option>
+                    <option v-for="(role, index) in roles" :key="index">{{role}}</option>
+                </select>
+            </div>
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-dark btn-large my-3 py-3">
                     <div v-if="isLoading" class="spinner-border text-light" role="status">
@@ -44,43 +51,10 @@
             </div>
         </div>
     </form>
-    <hr />
-    <form name="form-role" @submit.prevent="handleAddRole">
-        <div class="container">
-            <div class="mb-4">
-                <h2>Add a role to an existing user</h2>
-            </div>
-            <div v-if="roleErrorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Oops!</strong> {{roleErrorMessage}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <div v-if="roleSuccessMessage" class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> {{roleSuccessMessage}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <div class="form-floating mb-3">
-                <input v-model="roleEmail" type="email" class="form-control" name="email" id="floatingE" placeholder="name@example.com">
-                <label for="floatingE">Email address</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input v-model="roleName" type="text" class="form-control" name="roleName" id="floatingP" placeholder="Password">
-                <label for="floatingP">Role Name (Student, Admin)</label>
-            </div>
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-dark btn-large my-3 py-3">
-                    <div v-if="isLoading" class="spinner-border text-light" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                    <div v-if="!isLoading" class="text-center">
-                        Add role
-                    </div>
-                </button>
-            </div>
-        </div>
-    </form>
 </template>
 
 <script>
+    import roleService from '../services/roleService';
     import { mapActions } from 'vuex';
 
     export default {
@@ -88,24 +62,20 @@
         data() {
             return {
                 isLoading: false,
-                registerErrorMessage: '',
-                registerSuccessMessage: '',
+                errorMessage: '',
+                successMessage: '',
                 firstName: '',
                 lastName: '',
                 email: '',
                 password: '',
                 confirmPassword: '',
-
-                roleErrorMessage: '',
-                roleSuccessMessage: '',
-                roleEmail: '',
-                roleName: ''
+                roles: [],
+                selectedRole: '',
             };
         },
         methods: {
             ...mapActions({
                 register: 'authenticationModule/registerAction',
-                addRole: 'authenticationModule/addRoleAction'
             }),
             handleRegister() {
                 this.isLoading = true;
@@ -115,40 +85,34 @@
                     lastName: this.lastName,
                     email: this.email,
                     password: this.password,
-                    confirmPassword: this.confirmPassword
+                    confirmPassword: this.confirmPassword,
+                    roleName: this.selectedRole
                 }).then(data => {
                     this.isLoading = false;
-                    this.registerSuccessMessage = data.message;
+                    this.successMessage = data.message;
 
                     this.firstName = ''
                     this.lastName = '',
                     this.email = '',
                     this.password = '',
-                    this.confirmPassword =''
+                    this.confirmPassword = '',
+                    this.selectedRole = ''
 
                 }).catch(error => {
                     this.isLoading = false;
-                    this.registerErrorMessage = error.response.data.message;
-                });
-            },
-            handleAddRole() {
-                this.isLoading = true;
-
-                this.addRole({
-                    email: this.roleEmail,
-                    roleName: this.roleName
-                }).then(data => {
-                    this.isLoading = false;
-                    this.roleSuccessMessage = data.message;
-
-                    this.roleEmail = '',
-                    this.roleName = ''
-
-                }).catch(error => {
-                    this.isLoading = false;
-                    this.roleErrorMessage = error.response.data.message;
+                    this.errorMessage = error.response.data.message;
+                }).finally(() => {
+                    document.getElementById('alert').scrollIntoView();
                 });
             }
+        },
+        async created() {
+            await roleService.getAllAsync()
+                .then(response => {
+                    this.roles = response.data;
+                }).catch(error => {
+                    this.registerErrorMessage = error.response.data.message;
+                })
         }
     }
 </script>

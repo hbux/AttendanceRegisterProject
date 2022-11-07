@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 // Route dependencies
-const indexRoute = require('./routes/indexRoute');
-const authenticationRoute = require('./routes/authenticationRoute');
+const userRoute = require('./routes/userRoute');
+const roleRoute = require('./routes/roleRoute');
 
 // Db config dependencies
 const db = require('./config/keys').mongoUri;
@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 // Routes
-app.use('/', indexRoute);
-app.use('/authentication', authenticationRoute);
+app.use('/user', userRoute);
+app.use('/role', roleRoute);
 
 app.listen(port, console.log(`Server started on port: ${port}`));

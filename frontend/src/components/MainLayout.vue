@@ -7,7 +7,7 @@
             <div class="top-row px-4">
                 <LoginDisplay />
             </div>
-            <article class="content px-4">
+            <article class="content px-4" id="alert">
                 <router-view></router-view>
             </article>
         </main>
@@ -16,11 +16,7 @@
 
 <script>
     import MainNavigation from './MainNavigation.vue'
-    
     import LoginDisplay from './LoginDisplay.vue'
-    
-
-    
 
     export default {
         name: 'MainLayout',

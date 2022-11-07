@@ -15,7 +15,11 @@ const getters = {
             return false;
         }
 
-        return state.user.access_token && state.user.username;
+        if (!state.user.access_token || !state.user.username) {
+            return false;
+        }
+
+        return true;
     },
     username(state) {
         if (!state.user) {
@@ -43,11 +47,6 @@ const actions = {
     },
     async registerAction(_, data) {
         const response = await authenticationService.registerAsync(data);
-
-        return response.data;
-    },
-    async addRoleAction(_, data) {
-        const response = await authenticationService.addRoleAsync(data);
 
         return response.data;
     },

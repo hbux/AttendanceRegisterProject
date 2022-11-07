@@ -59,6 +59,8 @@
                 }).catch(error => {
                     this.isLoading = false;
                     this.errorMessage = error.response.data.message;
+                }).finally(() => {
+                    document.getElementById('alert').scrollIntoView();
                 });
             }
         }
