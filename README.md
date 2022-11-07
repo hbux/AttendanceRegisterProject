@@ -8,7 +8,7 @@ To terminate any of the programs, enter `CTRL + C`
 1. Open AttendanceRegisterProject in VS Code
 2. View > Terminal
 3. Enter `cd backend` inside the terminal to navigate to the backend folder
-    1. Enter `npm i express mongoose body-parser bcrypt cors jsonwebtoken` to install required dependencies 
+    1. Enter `npm i express mongoose body-parser bcrypt cors jsonwebtoken express-async-handler` to install required dependencies 
     2. Enter `node app.js` once dependencies have been installed 
 4. Enter `localhost:3000` in the URL of a browser
 
