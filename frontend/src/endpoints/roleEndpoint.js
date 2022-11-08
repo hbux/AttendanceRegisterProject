@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-class RoleService {
+class RoleEndpoint {
     apiUrl = 'http://localhost:3000/role/';
 
     async getAllAsync() {
@@ -10,4 +10,4 @@ class RoleService {
     }
 }
 
-export default new RoleService();
+export default new RoleEndpoint();

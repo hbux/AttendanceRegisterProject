@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const user = JSON.parse(localStorage.getItem('user'));
 
-class RegisterService {
+class RegisterEndpoint {
     apiUrl = 'http://localhost:3000/register/';
     
     async registerCodeAsync(data) {
@@ -10,7 +10,9 @@ class RegisterService {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
         }
 
-        let response = await axios.post(this.apiUrl, data);
+        let urlTarget = this.apiUrl + 'code';
+
+        let response = await axios.post(urlTarget, data);
 
         return response;
     }
@@ -26,6 +28,18 @@ class RegisterService {
 
         return response;
     }
+
+    async getRegistersAsync() {
+        if (user) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
+        }
+
+        let urlTarget = this.apiUrl + 'getall';
+
+        let response = await axios.get(urlTarget);
+
+        return response;
+    }
 }
 
-export default new RegisterService();
+export default new RegisterEndpoint();

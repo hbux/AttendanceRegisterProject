@@ -1,7 +1,6 @@
 import axios from 'axios'
-import jwtDecode from 'jwt-decode'
 
-import authenticationService from '../../services/authenticationService'
+import userEndpoint from '../endpoints/userEndpoint';
 
 const user = JSON.parse(localStorage.getItem('user'));
 
@@ -19,7 +18,7 @@ const getters = {
             return false;
         }
 
-        return true;
+        return true
     },
     username(state) {
         if (!state.user) {
@@ -50,27 +49,20 @@ const getters = {
 
 const actions = {
     async loginAction({dispatch }, data) {
-        const response = await authenticationService.loginAsync(data);
+        const response = await userEndpoint.loginAsync(data);
 
         return dispatch('attempt', response.data);
     },
     async registerAction(_, data) {
-        const response = await authenticationService.registerAsync(data);
+        const response = await userEndpoint.registerAsync(data);
 
         return response.data;
     },
     async attempt({ commit }, data) {
-        let decodedJwt = jwtDecode(data.access_token);
-
         let user = {
             access_token: data.access_token,
-            username: data.username,
-            email: decodedJwt.email,
-            id: decodedJwt.id,
-            roles: decodedJwt.roles
+            username: data.username
         };
-
-        console.log(user);
 
         commit('SET_USER', user);
     },
@@ -84,8 +76,6 @@ const mutations = {
         state.user = user;
 
         localStorage.setItem('user', JSON.stringify(user));
-
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
     },
     REMOVE_USER(state) {
         state.user = null;

@@ -1,30 +1,36 @@
 import { createWebHistory, createRouter } from 'vue-router';
 
-import Home from './views/Home.vue'
-import RegisterCode from './views/RegisterCode.vue'
-import Login from './views/Login.vue'
-import Admin from './views/Admin.vue'
+import Homepage from './pages/Home.vue';
+import Register from './pages/Register.vue';
+import Login from './pages/Login.vue';
+import Code from './pages/Code.vue';
+import Portal from './pages/Portal.vue';
 
 const routes = [
     {
         path: '/',
         name: 'HomePage',
-        component: Home
+        component: Homepage
     },
     {
-        path: '/code/register',
-        name: 'registerCode',
-        component: RegisterCode
+        path: '/register',
+        name: 'RegisterPage',
+        component: Register
     },
     {
         path: '/login',
-        name: 'login',
+        name: 'LoginPage',
         component: Login
     },
     {
-        path: '/admin',
-        name: 'admin',
-        component: Admin
+        path: '/code',
+        name: 'CodePage',
+        component: Code
+    },
+    {
+        path: '/portal',
+        name: 'PortalPage',
+        component: Portal
     }
 ];
 

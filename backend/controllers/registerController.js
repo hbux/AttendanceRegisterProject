@@ -64,6 +64,20 @@ class RegisterController {
         return res.status(200).send({ message: 'Register successfully activated.' });
     })
 
+    getRegisters = asyncHandler(async(req, res) => {
+        let user = req.user;
+
+        let registers = await Register.find({
+            'tutor.user': user.id
+        });
+
+        if (registers.length == 0) {
+            return res.status(404).send({ message: 'No registers found.' });
+        }
+
+        return res.status(200).json(registers);
+    })
+
     createFakeData = asyncHandler(async(req, res) => {
         let register_1 = await Register.create({
             isActive: false,
@@ -74,14 +88,14 @@ class RegisterController {
                     staffId: 30491,
                     firstName: "Soumya",
                     lastName: "Basu",
-                    user: "636a811bbe034a8c406367a6"
+                    user: "636a89c157727da50403fedd"
                 }
             },
             tutor: {
                 staffId: 30491,
                 firstName: "Soumya",
                 lastName: "Basu",
-                user: "636a811bbe034a8c406367a6"
+                user: "636a89c157727da50403fedd"
             },
             class: {
                 startDate: Date.now(),

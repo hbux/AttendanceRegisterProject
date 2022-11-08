@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-class AuthenticationService {
+class UserEndpoint {
     apiUrl = 'http://localhost:3000/user/';
-    
+
     async loginAsync(data) {
         let urlTarget = this.apiUrl + 'login';
 
@@ -10,6 +10,7 @@ class AuthenticationService {
 
         return response;
     }
+
     async registerAsync(data) {
         let urlTarget = this.apiUrl + 'register';
 
@@ -17,13 +18,6 @@ class AuthenticationService {
 
         return response;
     }
-    async addRoleAsync(data) {
-        let urlTarget = this.apiUrl + 'role/add';
-
-        let response = await axios.post(urlTarget, data);
-
-        return response;
-    }
 }
 
-export default new AuthenticationService();
+export default new UserEndpoint();

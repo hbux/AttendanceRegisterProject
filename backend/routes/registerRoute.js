@@ -6,16 +6,21 @@ const authenticationMiddleware = require('../middleware/authenticationMiddleware
 const registerController = require('../controllers/registerController');
 
 // Http requests
-router.post('/', 
+router.post('/code', 
     authenticationMiddleware.ensureAuthenticated,
     authenticationMiddleware.ensureStudent, 
     registerController.registerCode);
 
-router.post('/activate', 
+router.put('/activate', 
     authenticationMiddleware.ensureAuthenticated,
     authenticationMiddleware.ensureTutor,
     registerController.activateRegister);
+
+router.get('/getall', 
+    authenticationMiddleware.ensureAuthenticated,
+    authenticationMiddleware.ensureTutor, 
+    registerController.getRegisters);
     
-router.get('/', registerController.createFakeData);
+router.get('/fake', registerController.createFakeData);
 
 module.exports = router;

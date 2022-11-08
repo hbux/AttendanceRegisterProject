@@ -14,7 +14,7 @@ class AuthenticationMiddleware {
 
             next();
         } catch (error) {
-            return res.status(401).send({ message: error });
+            return res.status(401).send({ message: 'Token invalid. Unauthorized.' });
         }
     })
 
