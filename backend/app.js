@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const logger = require('morgan');
 
 // Route dependencies
 const userRoute = require('./routes/userRoute');
@@ -26,6 +27,9 @@ app.use(express.urlencoded({ extended: false }));
 
 // CORS
 app.use(cors());
+
+// Logger
+app.use(logger('dev'));
 
 // Routes
 app.use('/user', userRoute);
