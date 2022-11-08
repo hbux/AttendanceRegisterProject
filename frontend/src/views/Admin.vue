@@ -9,7 +9,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <div v-if="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> {{registerSuccessMessage}}
+                <strong>Success!</strong> {{successMessage}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <div class="form-floating mb-3">
@@ -34,7 +34,7 @@
             </div>
             <div class="my-3">
             <label for="password" class="form-label">Role of user</label>
-                <select v-model="selectedRole" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <select v-model="selectedRoles" multiple class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                     <option disabled>Choose a role</option>
                     <option v-for="(role, index) in roles" :key="index">{{role}}</option>
                 </select>
@@ -70,7 +70,7 @@
                 password: '',
                 confirmPassword: '',
                 roles: [],
-                selectedRole: '',
+                selectedRoles: []
             };
         },
         methods: {
@@ -86,7 +86,7 @@
                     email: this.email,
                     password: this.password,
                     confirmPassword: this.confirmPassword,
-                    roleName: this.selectedRole
+                    roles: this.selectedRoles
                 }).then(data => {
                     this.isLoading = false;
                     this.successMessage = data.message;
@@ -96,7 +96,7 @@
                     this.email = '',
                     this.password = '',
                     this.confirmPassword = '',
-                    this.selectedRole = ''
+                    this.selectedRoles = []
 
                 }).catch(error => {
                     this.isLoading = false;

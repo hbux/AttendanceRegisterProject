@@ -14,16 +14,6 @@
                     <span class="oi oi-home" aria-hidden="true"></span> Home
                 </router-link>
             </div>
-             <div class="nav-item px-3">
-                <router-link active-class="active" to="/course" exact class="nav-link">
-                    <span class="oi oi-course" ></span> Courses
-                </router-link>
-            </div>
-             <div class="nav-item px-3">
-                <router-link active-class="active" to="/module" exact class="nav-link">
-                    <span class="oi oi-module" ></span> Modules
-                </router-link>
-            </div>
             <div v-if="isInStudentRole" class="nav-item px-3">
                 <router-link active-class="active" to="/code/register" exact class="nav-link">
                     <span class="oi oi-plus" aria-hidden="true"></span> Register code
@@ -45,7 +35,8 @@
         },
         computed: {
             ...mapGetters({
-                isInStudentRole: 'authenticationModule/isInStudentRole'
+                isInStudentRole: 'authenticationModule/isInStudentRole',
+                isInTutorRole: 'authenticatedModule/isInTutorRole'
             })
         },
         methods: {

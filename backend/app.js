@@ -6,6 +6,7 @@ const cors = require('cors');
 // Route dependencies
 const userRoute = require('./routes/userRoute');
 const roleRoute = require('./routes/roleRoute');
+const registerRoute = require('./routes/registerRoute');
 
 // Db config dependencies
 const db = require('./config/keys').mongoUri;
@@ -29,5 +30,6 @@ app.use(cors());
 // Routes
 app.use('/user', userRoute);
 app.use('/role', roleRoute);
+app.use('/register', registerRoute);
 
 app.listen(port, console.log(`Server started on port: ${port}`));

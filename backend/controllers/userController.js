@@ -37,9 +37,9 @@ class UserController {
     })
 
     register = asyncHandler(async(req, res) => {
-        const { firstName, lastName, email, password, confirmPassword, roleName } = req.body;
+        const { firstName, lastName, email, password, confirmPassword, roles } = req.body;
 
-        if (!firstName || !lastName || !email || !password || !confirmPassword || !roleName) {
+        if (!firstName || !lastName || !email || !password || !confirmPassword || !roles) {
             return res.status(400).send({ message: 'Please enter all fields.' });
         }
 
@@ -55,17 +55,13 @@ class UserController {
 
         let encryptedPassword  = bcrypt.hashSync(password, 8);
 
-        let roles = [{
-            roleName
-        }]
-        
         const user = await User.create({
             firstName,
             lastName,
             email,
             hashedPassword: encryptedPassword,
             roles
-        })
+        });
 
         if (user) {
             return res.status(200).send({ message: 'Thanks, your account has been created.' });

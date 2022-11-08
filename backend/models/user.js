@@ -19,9 +19,7 @@ const User = mongoose.Schema({
         required: true
     },
     roles: [{
-        roleName: {
-            type: String
-        }
+        type: String
     }]
 });
 

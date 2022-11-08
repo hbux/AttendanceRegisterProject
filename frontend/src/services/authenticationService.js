@@ -3,7 +3,6 @@ import axios from 'axios'
 class AuthenticationService {
     apiUrl = 'http://localhost:3000/user/';
     
-
     async loginAsync(data) {
         let urlTarget = this.apiUrl + 'login';
 

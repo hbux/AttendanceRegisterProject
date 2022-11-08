@@ -4,8 +4,6 @@ import Home from './views/Home.vue'
 import RegisterCode from './views/RegisterCode.vue'
 import Login from './views/Login.vue'
 import Admin from './views/Admin.vue'
-import Course from './views/Course.vue'
-import Module from './views/Module.vue'
 
 const routes = [
     {
@@ -27,16 +25,6 @@ const routes = [
         path: '/admin',
         name: 'admin',
         component: Admin
-    },
-    {
-        path: '/course',
-        name: 'course',
-        component: Course
-    },
-    {
-        path: '/module',
-        name: 'module',
-        component: Module
     }
 ];
 

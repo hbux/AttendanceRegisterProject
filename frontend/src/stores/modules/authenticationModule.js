@@ -33,9 +33,18 @@ const getters = {
             return false;
         }
 
-        let isStudentRole = state.user.roles.filter(r => r.roleName === 'Student').length > 0;
+        let isStudentRole = state.user.roles.filter(r => r === 'Student').length > 0;
         
         return state.user.access_token && state.user.username && isStudentRole;
+    },
+    isInTutorRole(state) {
+        if (!state.user) {
+            return false;
+        }
+
+        let isInTutorRole = state.user.roles.filter(r => r === 'Tutor' || r === 'Module leader');
+
+        return state.user.access_token && state.user.username && isInTutorRole;
     }
 }
 
