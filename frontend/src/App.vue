@@ -8,7 +8,7 @@
 		</div>
 	</nav>
 	<div class="view">
-		<div :class="{ collapse: collapseNavMenu }">
+		<div id="sidebar-container" :class="{ collapse: collapseNavMenu }">
 			<div class="sidebar bg-light">
 				<nav class="flex-column">
 					<MainNavigation />
@@ -63,9 +63,14 @@ export default {
 		flex-direction: row;
 	}
 
+	.sidebar-container {
+		min-height: 100vh;
+	}
+
 	.sidebar {
 		width: 250px;
-		min-height: calc(100vh - 3.6rem);
+		min-height: 100vh;
+		height: 100%;
 		border-right: 1px solid #d6d5d5;
 	}
 
