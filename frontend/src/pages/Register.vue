@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import userService from '../services/registerService'
+import userService from '../services/userService';
 import roleService from '../services/roleService';
 
 export default {
@@ -91,25 +91,24 @@ export default {
                 password: this.password,
                 confirmPassword: this.confirmPassword,
                 roles: this.selectedRoles
-            }).then(data => {
+            }).then(response => {
                 this.isLoading = false;
-                this.successMessage = data.message;
+                this.successMessage = response.data.message;
 
-                this.firstName = ''
-                this.lastName = '',
-                this.email = '',
-                this.password = '',
-                this.confirmPassword = '',
-                this.selectedRoles = []
+                this.firstName = '';
+                this.lastName = '';
+                this.email = '';
+                this.password = '';
+                this.confirmPassword = ''
+                this.selectedRoles = [];
 
-                this.errorMessage = ''
-
+                this.errorMessage = '';
             }).catch(error => {
                 this.isLoading = false;
                 this.errorMessage = error.response.data.message;
 
                 this.successMessage = ''
-            })
+            });
         }
     },
     async created() {
