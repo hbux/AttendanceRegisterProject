@@ -4,6 +4,8 @@ import HomePage from './pages/Home.vue';
 import LoginPage from './pages/Login.vue';
 import RegisterPage from './pages/Register.vue';
 import CodePage from './pages/Code.vue';
+import StaffPage from './pages/Staff.vue';
+import AdminPage from './pages/Admin.vue';
 
 const routes = [
     {
@@ -22,9 +24,19 @@ const routes = [
         component: RegisterPage
     },
     {
-        path: '/student/checkin',
+        path: '/checkin',
         name: 'CodePage',
         component: CodePage
+    },
+    {
+        path: '/staff',
+        name: 'StaffPage',
+        component: StaffPage
+    },
+    {
+        path: '/admin',
+        name: 'AdminPage',
+        component: AdminPage
     }
 ];
 
