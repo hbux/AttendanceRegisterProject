@@ -65,7 +65,7 @@ export default {
 
 	.sidebar {
 		width: 250px;
-		min-height: 100vh;
+		min-height: calc(100vh - 3.6rem);
 		border-right: 1px solid #d6d5d5;
 	}
 
