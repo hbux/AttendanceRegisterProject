@@ -91,6 +91,55 @@ class UserController {
             return res.status(400).send({ message: 'Something went wrong creating your account.' })
         }
     })
+
+    getAllUsers = asyncHandler(async(req, res) => {
+        let allUsers = await User.find();
+
+        if (!allUsers) {
+            return res.status(400).send({ message: 'Unable to load users from database.' });
+        }
+
+        return res.status(200).json(allUsers);
+    })
+
+    updateUser = asyncHandler(async(req, res) => {
+        let { id, firstName, lastName, email, roles } = req.body;
+
+        if (!id || !firstName || !lastName || !email || !roles) {
+            return res.status(400).send({ message: 'Please enter all fields.' });
+        }
+
+        let userToUpdate = await User.findById(id);
+
+        if (!userToUpdate) {
+            return res.status(403).send({ message: 'Unauthorized to update this user.' });
+        }
+
+        userToUpdate.firstName = firstName;
+        userToUpdate.lastName = lastName;
+        userToUpdate.email = email;
+        userToUpdate.roles = roles;
+
+        await userToUpdate.save();
+
+        return res.status(200).json(userToUpdate);
+    })
+
+    deleteUser = asyncHandler(async(req, res) => {
+        let id = req.params.id;
+
+        if (!id) {
+            return res.status(400).send({ message: 'Delete failed, no ID provided.' });
+        }
+
+        try {
+            await User.findByIdAndDelete(id);
+
+            return res.status(200).send({ message: 'User deleted successfully.' });
+        } catch (error) {
+            return res.status(400).send({ message: error });
+        }
+    })
 }
 
 module.exports = new UserController();

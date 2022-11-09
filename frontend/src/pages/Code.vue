@@ -1,9 +1,11 @@
 <template>
     <div class="container">
         <form @submit.prevent="handleCode" name="login-form" class="container my-4" style="max-width: 500px;">
-            <div v-if="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div v-if="errorMessage" class="alert alert-danger" role="alert">
                 <strong>Oops!</strong> {{errorMessage}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div v-if="successMessage" class="alert alert-success" role="alert">
+                <strong>Success!</strong> {{successMessage}}
             </div>
             <div class="card">
                 <div class="card-header py-2" style="font-size: 2rem">
@@ -52,10 +54,11 @@ export default {
 
             await registerService.checkinCodeAsync({
                 code: this.code
-            }).then(() => {
+            }).then(response => {
                 this.isLoading = false;
                 this.code = '';
-                this.errorMessage = ''
+                this.errorMessage = '',
+                this.successMessage = response.data.message;
             }).catch(error => {
                 this.isLoading = false;
                 this.code = '';

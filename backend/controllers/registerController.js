@@ -22,8 +22,14 @@ class RegisterController {
             return res.status(404).send({ message: 'Register has not been opened yet, try again when the tutor has activated the register.' });
         }
 
+
+        register.class.students.forEach(s => console.log(s.user.toString()));
+        console.log(user.id);
+
         // Only a student who is timetabled for this class can register their attendance
         let student = register.class.students.find(s => s.user == user.id);
+
+        console.log(student);
 
         // No student found - they aren't listed in the timetable
         if (!student) {
@@ -50,25 +56,25 @@ class RegisterController {
     // PUT /register/activate: This code attempts to activate a register
     activateRegister = asyncHandler(async(req, res) => {
         // use deconstruction to get the registerId from the request body
-        let { registerId } = req.body;
+        let { id } = req.body;
         let user = req.user;
 
         // Find a register by id in the database
-        let register = await Register.findById(registerId);
+        let registerToUpdate = await Register.findById(id);
 
-        if (!register) {
+        if (!registerToUpdate) {
             // No register found
             return res.status(404).send({ message: 'Unable to active register. Register not found.' });
         }
 
         // Only the tutor of the class can activate the register
-        if (register.tutor.user.id == user.id) {
+        if (registerToUpdate.tutor.user.id == user.id) {
             // the user who sent this request does not match the registers tutor
             return res.status(403).send({ message: 'Unable to activate register. You are not the tutor of the class.' });
         }
 
         // Validation to ensure the register is not already active
-        if (register.isActive == true) {
+        if (registerToUpdate.isActive == true) {
             return res.status(400).send({ message: 'Register has already been activated.' });
         } 
 
@@ -76,18 +82,18 @@ class RegisterController {
         let randomCode = Math.floor(Math.random() * 10000) + 1000;
 
         // Set the register status to active as the tutor has now activate it
-        register.isActive = true;
-        register.dateActivated = Date.now();
-        register.code = randomCode;
+        registerToUpdate.isActive = true;
+        registerToUpdate.dateActivated = Date.now();
+        registerToUpdate.code = randomCode;
 
         // TODO
         // Ensure code is not the same as any other register
     
         // Mongoose tracks entity changes, these will now be updated in the database
-        await register.save();
+        await registerToUpdate.save();
 
         // Nothing failed, register has now been activated
-        return res.status(200).send({ message: 'Register successfully activated.' });
+        return res.status(200).json(registerToUpdate);
     })
 
     // GET /register/getall: this method gets all the registers related to the tutor who sent the request
@@ -99,52 +105,25 @@ class RegisterController {
             'tutor.user': user.id
         });
 
-        // No registers were found
-        if (registers.length == 0) {
-            return res.status(404).send({ message: 'No registers found.' });
-        }
-
         // Nothing failed and array was populated return registers as json
         return res.status(200).json(registers);
     })
 
-    // Helper method to quickly create database data
-    createFakeData = asyncHandler(async(req, res) => {
-        let register_1 = await Register.create({
-            isActive: false,
-            module: {
-                moduleId: "909882-AF-SEM1",
-                name: "Software Architecture and Design",
-                moduleLeader: {
-                    staffId: 30491,
-                    firstName: "Soumya",
-                    lastName: "Basu",
-                    user: "636a89c157727da50403fedd"
-                }
-            },
-            tutor: {
-                staffId: 30491,
-                firstName: "Soumya",
-                lastName: "Basu",
-                user: "636a89c157727da50403fedd"
-            },
-            class: {
-                startDate: Date.now(),
-                duration: "10:00-12:00",
-                students: 
-                [
-                    {
-                        studentId: 100120,
-                        firstName: "John",
-                        lastName: "Doe",
-                        user: "636a89e757727da50403fee0",
-                        hasRegistered: false
-                    }
-                ]
-            }
-        });
+    getRegister = asyncHandler(async(req, res) => {
+        let id = req.params.id;
+        let user = req.user;
 
-        return res.status(200).send(register_1);
+        let register = await Register.findById(id);
+
+        if (!register) {
+            return res.status(404).send({ message: 'Unable to find register.' });
+        }
+
+        if (register.tutor.user != user.id) {
+            return res.status(403).send({ message: 'Unauthorized to access this register.' });
+        }
+
+        return res.status(200).json(register);
     })
 }
 

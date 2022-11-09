@@ -2,25 +2,13 @@
 const express = require('express');
 const router = express.Router();
 
-const authenticationMiddleware = require('../middleware/authenticationMiddleware');
+const auth = require('../middleware/authenticationMiddleware');
 const registerController = require('../controllers/registerController');
 
 // Http requests
-router.post('/code', 
-    authenticationMiddleware.ensureAuthenticated,
-    authenticationMiddleware.ensureStudent, 
-    registerController.registerCode);
-
-router.put('/activate', 
-    authenticationMiddleware.ensureAuthenticated,
-    authenticationMiddleware.ensureTutor,
-    registerController.activateRegister);
-
-router.get('/getall', 
-    authenticationMiddleware.ensureAuthenticated,
-    authenticationMiddleware.ensureTutor, 
-    registerController.getRegisters);
-    
-router.get('/fake', registerController.createFakeData);
+router.get('/getall', auth.ensureAuthenticated, auth.ensureTutor, registerController.getRegisters);
+router.get('/get/:id', auth.ensureAuthenticated,auth.ensureTutor, registerController.getRegister);
+router.post('/code', auth.ensureAuthenticated,auth.ensureStudent, registerController.registerCode);
+router.put('/activate', auth.ensureAuthenticated,auth.ensureTutor, registerController.activateRegister);
 
 module.exports = router;

@@ -18,6 +18,44 @@ class UserService {
 
         return response;
     }
+
+    async getAllAsync() {
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (user) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
+        }
+
+        let response = await axios.get(this.apiUrl);
+
+        return response;
+    }
+
+    async updateUser(data) {
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (user) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
+        }
+
+        let response = await axios.put(this.apiUrl, data);
+
+        return response;
+    }
+
+    async deleteUser(data) {
+        const user = JSON.parse(localStorage.getItem('user'));
+        
+        if (user) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
+        }
+
+        let urlTarget = this.apiUrl + data.id;
+
+        let response = await axios.delete(urlTarget);
+
+        return response;
+    }
 }
 
 export default new UserService();

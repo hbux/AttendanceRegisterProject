@@ -9,7 +9,7 @@
             </div>
             <div class="card">
                 <div class="card-header py-2" style="font-size: 2rem">
-                    Register for an account
+                    Register a new user
                 </div>
                 <div class="card-body row">
                     <div class="mb-3 col-6">
@@ -51,9 +51,6 @@
                             </div>
                         </button>
                     </div>
-                </div>
-                <div class="card-footer text-muted py-2">
-                    Already have an account? <router-link to="/login">Log in</router-link>
                 </div>
             </div>
         </form>
