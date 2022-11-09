@@ -15,8 +15,8 @@
 				</nav>
 			</div>
 		</div>
-		<div class="content-container">
-			<div class="content" id="alert">
+		<div id="alert" class="content-container">
+			<div class="content">
 				<router-view></router-view>
 			</div>
 		</div>
@@ -51,6 +51,13 @@ export default {
     flex-direction: column;
 }
 
+.content-container {
+    position: relative;
+    display: flex;
+	flex: 1;
+    flex-direction: column;
+}
+
 @media (min-width: 641px) {
 	.view {
 		flex-direction: row;
@@ -68,6 +75,11 @@ export default {
 
 	.collapse {
 		display: block !important;
+	}
+}
+@media (min-width: 1000px) {
+	.content {
+		flex-direction: row;
 	}
 }
 </style>
