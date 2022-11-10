@@ -122,20 +122,26 @@ class RegisterController {
         return res.status(200).json(registers);
     })
 
+    // GET /register/: this method gets a register by registerId
     getRegister = asyncHandler(async(req, res) => {
+        // Retrieve id from parameters
         let id = req.params.id;
         let user = req.user;
 
+        // Attempt to find a register by id
         let register = await Register.findById(id);
 
+        // No register was found
         if (!register) {
             return res.status(404).send({ message: 'Unable to find register.' });
         }
 
+        // Ensure the register tutor is the same as the tutor sending the request
         if (register.tutor.user != user.id) {
             return res.status(403).send({ message: 'Unauthorized to access this register.' });
         }
 
+        // User is authorized to access the register so return it as json
         return res.status(200).json(register);
     })
 }

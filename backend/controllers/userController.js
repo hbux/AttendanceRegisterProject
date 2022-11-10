@@ -92,46 +92,62 @@ class UserController {
         }
     })
 
+    // GET /user/: this method retrieves all users from the database
     getAllUsers = asyncHandler(async(req, res) => {
+        // Get all users
         let allUsers = await User.find();
 
+        // If user array is undefined (meaning an error occured when getting users)
         if (!allUsers) {
             return res.status(400).send({ message: 'Unable to load users from database.' });
         }
 
+        // return the array of users as json
         return res.status(200).json(allUsers);
     })
 
+    // PUT /user/: this method updates a user
     updateUser = asyncHandler(async(req, res) => {
+        // The fields which need updating from the request
         let { id, firstName, lastName, email, roles } = req.body;
 
+        // Ensure the fields aren't empty
         if (!id || !firstName || !lastName || !email || !roles) {
             return res.status(400).send({ message: 'Please enter all fields.' });
         }
 
+        // Attempt to find the user by id
         let userToUpdate = await User.findById(id);
 
+        // Couldn't find the user
         if (!userToUpdate) {
             return res.status(403).send({ message: 'Unauthorized to update this user.' });
         }
 
+        // Update the neccessary fields
         userToUpdate.firstName = firstName;
         userToUpdate.lastName = lastName;
         userToUpdate.email = email;
         userToUpdate.roles = roles;
 
+        // Save the user
         await userToUpdate.save();
 
+        // nothing failed, return the new updated user
         return res.status(200).json(userToUpdate);
     })
 
+    // DELETE /user/:id: this method deletes a user by id from the database
     deleteUser = asyncHandler(async(req, res) => {
+        // Get the user id to delete from the request parameters 
         let id = req.params.id;
 
+        // If ID was empty return an error
         if (!id) {
             return res.status(400).send({ message: 'Delete failed, no ID provided.' });
         }
 
+        // Attempt to find the user and delete them, returns either success or error
         try {
             await User.findByIdAndDelete(id);
 
