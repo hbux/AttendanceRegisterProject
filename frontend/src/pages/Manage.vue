@@ -66,7 +66,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import attendanceService from '../services/attendanceService';
+import registerService from '../services/registerService';
 
 export default {
     name: 'ManagePage',
@@ -84,7 +84,7 @@ export default {
     },
     methods: {
         async handleActivation() {
-            await attendanceService.activateRegisterAsync({
+            await registerService.activateRegisterAsync({
                 id: this.register._id
             }).then(response => {
                 this.register = response.data;
@@ -94,7 +94,7 @@ export default {
         }
     },
     async created() {
-        await attendanceService.getRegisterAsync(this.id)
+        await registerService.getRegisterAsync(this.id)
             .then(response => {
                 this.register = response.data;
             }).catch(error => {

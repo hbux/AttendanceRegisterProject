@@ -29,7 +29,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import attendanceService from '../services/attendanceService';
+import registerService from '../services/registerService';
 
 export default {
     name: 'RegistersPage',
@@ -45,7 +45,7 @@ export default {
         })
     },
     async created() {
-        await attendanceService.getRegistersAsync()
+        await registerService.getRegistersAsync()
             .then(response => {
                 this.registers = response.data;
             }).catch(error => {

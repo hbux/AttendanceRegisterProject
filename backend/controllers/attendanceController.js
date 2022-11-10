@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const Register = require('../models/register');
 
 class AttendanceController {
-    // POST /attendance/register: This code attempts to register the user in a class
+    // POST /attendance/: This code attempts to register the user in a class
     registerCode = asyncHandler(async(req, res) => {
         // use deconstruction to get the code from the request body
         let { code } = req.body;
@@ -47,83 +47,12 @@ class AttendanceController {
         return res.status(200).send({ message: 'Successfully registered your attendance for this class.' });
     })
 
-    // PUT /register/activate: This code attempts to activate a register
-    activateRegister = asyncHandler(async(req, res) => {
-        // use deconstruction to get the registerId from the request body
-        let { id } = req.body;
+    // PUT /attendance/: this method updates a students attendance
+    editStudentAttendance = asyncHandler(async(req, res) => {
+        let { registerId, studentId } = req.body;
         let user = req.user;
-
-        // Find a register by id in the database
-        let registerToUpdate = await Register.findById(id);
-
-        if (!registerToUpdate) {
-            // No register found
-            return res.status(404).send({ message: 'Unable to active register. Register not found.' });
-        }
-
-        // Only the tutor of the class can activate the register
-        if (registerToUpdate.tutor.user.id == user.id) {
-            // the user who sent this request does not match the registers tutor
-            return res.status(403).send({ message: 'Unable to activate register. You are not the tutor of the class.' });
-        }
-
-        // Validation to ensure the register is not already active
-        if (registerToUpdate.isActive == true) {
-            return res.status(400).send({ message: 'Register has already been activated.' });
-        } 
-
-        let randomCode = 0;
-
-        do {
-            // Create a random code for the register
-            randomCode = Math.floor(Math.random() * 10000) + 1000;
-
-            // find a register with existing code
-            let existingCode = await Register.findOne({
-                code: randomCode
-            });
-
-            // code already exists
-            if (existingCode) {
-                randomCode = 0;
-            }
-
-        } while(randomCode == 0);
         
-
-        // Set the register status to active as the tutor has now activate it
-        registerToUpdate.isActive = true;
-        registerToUpdate.dateActivated = Date.now();
-        registerToUpdate.code = randomCode;
-
-        // Mongoose tracks entity changes, these will now be updated in the database
-        await registerToUpdate.save();
-
-        // Nothing failed, register has now been activated
-        return res.status(200).json(registerToUpdate);
-    })
-
-    // GET /register/getall: this method gets all the registers related to the tutor who sent the request
-    getRegisters = asyncHandler(async(req, res) => {
-        let user = req.user;
-
-        // Find all registers who match the expression using mongoose DOT notation
-        let registers = await Register.find({
-            'tutor.user': user.id
-        });
-
-        // Nothing failed and array was populated return registers as json
-        return res.status(200).json(registers);
-    })
-
-    // GET /register/: this method gets a register by registerId
-    getRegister = asyncHandler(async(req, res) => {
-        // Retrieve id from parameters
-        let id = req.params.id;
-        let user = req.user;
-
-        // Attempt to find a register by id
-        let register = await Register.findById(id);
+        let register = await Register.findById(registerId);
 
         // No register was found
         if (!register) {
@@ -135,8 +64,22 @@ class AttendanceController {
             return res.status(403).send({ message: 'Unauthorized to access this register.' });
         }
 
-        // User is authorized to access the register so return it as json
-        return res.status(200).json(register);
+        // Find the student on the register
+        let student = register.class.students.find(s => s.user == studentId);
+
+        // No student found - they aren't listed in the timetable
+        if (!student) {
+            return res.status(403).send({ message: 'Registration code invalid.' });
+        }
+
+        // Set it to the opposite of what it current is
+        student.hasRegistered = !student.hasRegistered;
+
+        // Save the change
+        await register.save();
+
+        // Nothing failed, changing student attendance succeeded.
+        return res.status(200).json(student);
     })
 }
 

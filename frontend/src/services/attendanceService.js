@@ -10,51 +10,19 @@ class AttendanceService {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
         }
 
-        let urlTarget = this.apiUrl + 'register';
-
-        let response = await axios.post(urlTarget, data);
+        let response = await axios.post(this.apiUrl, data);
 
         return response;
     }
-    
-    async activateRegisterAsync(data) {
+
+    async editStudentAttendanceAsync(data) {
         const user = JSON.parse(localStorage.getItem('user'));
 
         if (user) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
         }
 
-        let urlTarget = this.apiUrl + 'activate';
-
-        let response = await axios.put(urlTarget, data);
-
-        return response;
-    }
-
-    async getRegistersAsync() {
-        const user = JSON.parse(localStorage.getItem('user'));
-        
-        if (user) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
-        }
-
-        let urlTarget = this.apiUrl + 'registers/all';
-
-        let response = await axios.get(urlTarget);
-
-        return response;
-    }
-
-    async getRegisterAsync(id) {
-        const user = JSON.parse(localStorage.getItem('user'));
-        
-        if (user) {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
-        }
-
-        let urlTarget = this.apiUrl + 'registers/' + id;
-
-        let response = await axios.get(urlTarget);
+        let response = await axios.put(this.apiUrl, data);
 
         return response;
     }
