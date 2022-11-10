@@ -22,14 +22,8 @@ class RegisterController {
             return res.status(404).send({ message: 'Register has not been opened yet, try again when the tutor has activated the register.' });
         }
 
-
-        register.class.students.forEach(s => console.log(s.user.toString()));
-        console.log(user.id);
-
         // Only a student who is timetabled for this class can register their attendance
         let student = register.class.students.find(s => s.user == user.id);
-
-        console.log(student);
 
         // No student found - they aren't listed in the timetable
         if (!student) {
