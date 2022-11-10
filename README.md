@@ -2,7 +2,7 @@
 1. Open AttendanceRegisterProject in VS Code
 2. View > Terminal
 3. Enter `cd backend` inside the terminal to navigate to the backend folder
-    1. Enter `npm i packagelock.json` to install required dependencies 
+    1. Enter `npm i package-lock.json` to install required dependencies 
 
 ---
 
