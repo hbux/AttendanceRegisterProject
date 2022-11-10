@@ -65,7 +65,7 @@ const Register = mongoose.Schema({
     },
     class: {
         startDate: {
-            type: Date,
+            type: String,
             required: true
         },
         duration: {
