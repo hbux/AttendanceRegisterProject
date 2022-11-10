@@ -42,9 +42,18 @@ const getters = {
             return false;
         }
 
-        let isInTutorRole = state.user.roles.filter(r => r === 'Tutor' || r === 'Module leader').length > 0;
+        let isInTutorRole = state.user.roles.filter(r => r === 'Tutor' || r === 'Module Leader').length > 0;
 
         return state.user.access_token && state.user.username && isInTutorRole;
+    },
+    isInModuleLeaderRole(state) {
+        if (!state.user) {
+            return false;
+        }
+
+        let isInMLRole = state.user.roles.filter(r => r === 'Module Leader').length > 0;
+
+        return state.user.access_token && state.user.username && isInMLRole;
     },
     isInAdminRole(state) {
         if (!state.user) {

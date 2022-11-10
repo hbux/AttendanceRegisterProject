@@ -1,0 +1,597 @@
+[{
+  "_id": {
+    "$oid": "636d191368882aae23ebae38"
+  },
+  "isActive": false,
+  "module": {
+    "moduleId": "55-608212-AF-20223",
+    "name": "Human Factors",
+    "moduleLeader": {
+      "staffId": 800200,
+      "firstName": "Salahuddin",
+      "lastName": "Hooper",
+      "user": {
+        "$oid": "636d14545451a04e72d994c1"
+      }
+    }
+  },
+  "tutor": {
+    "staffId": 800200,
+    "firstName": "Salahuddin",
+    "lastName": "Hooper",
+    "user": {
+      "$oid": "636d14545451a04e72d994c1"
+    }
+  },
+  "class": {
+    "startDate": "10/11/2022",
+    "duration": "10:00-12:00",
+    "students": [
+      {
+        "studentId": 100200,
+        "firstName": "James",
+        "lastName": "Smith",
+        "user": {
+          "$oid": "636d14545451a04e72d994b1"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae39"
+        }
+      },
+      {
+        "studentId": 100201,
+        "firstName": "John",
+        "lastName": "Smith",
+        "user": {
+          "$oid": "636d14545451a04e72d994b2"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae3a"
+        }
+      },
+      {
+        "studentId": 100202,
+        "firstName": "John",
+        "lastName": "Doe",
+        "user": {
+          "$oid": "636d14545451a04e72d994b3"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae3b"
+        }
+      },
+      {
+        "studentId": 100282,
+        "firstName": "Marge",
+        "lastName": "Simpson",
+        "user": {
+          "$oid": "636d14545451a04e72d994b4"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae3c"
+        }
+      },
+      {
+        "studentId": 100283,
+        "firstName": "Homer",
+        "lastName": "Smith",
+        "user": {
+          "$oid": "636d14545451a04e72d994b5"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae3d"
+        }
+      },
+      {
+        "studentId": 100284,
+        "firstName": "Susan",
+        "lastName": "Mayflower",
+        "user": {
+          "$oid": "636d14545451a04e72d994b6"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae3e"
+        }
+      }
+    ]
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d191368882aae23ebae3f"
+  },
+  "isActive": false,
+  "module": {
+    "moduleId": "55-608212-AF-20223",
+    "name": "Human Factors",
+    "moduleLeader": {
+      "staffId": 800200,
+      "firstName": "Salahuddin",
+      "lastName": "Hooper",
+      "user": {
+        "$oid": "636d14545451a04e72d994c1"
+      }
+    }
+  },
+  "tutor": {
+    "staffId": 800200,
+    "firstName": "Salahuddin",
+    "lastName": "Hooper",
+    "user": {
+      "$oid": "636d14545451a04e72d994c1"
+    }
+  },
+  "class": {
+    "startDate": "10/11/2022",
+    "duration": "12:00-14:00",
+    "students": [
+      {
+        "studentId": 100204,
+        "firstName": "Abdullah",
+        "lastName": "Malik",
+        "user": {
+          "$oid": "636d14545451a04e72d994b7"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae40"
+        }
+      },
+      {
+        "studentId": 100205,
+        "firstName": "Zain",
+        "lastName": "Whaid",
+        "user": {
+          "$oid": "636d14545451a04e72d994b8"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae41"
+        }
+      },
+      {
+        "studentId": 100206,
+        "firstName": "Bethany",
+        "lastName": "Green",
+        "user": {
+          "$oid": "636d14545451a04e72d994b9"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae42"
+        }
+      },
+      {
+        "studentId": 100207,
+        "firstName": "Ammar",
+        "lastName": "Saeed",
+        "user": {
+          "$oid": "636d14545451a04e72d994ba"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae43"
+        }
+      },
+      {
+        "studentId": 100208,
+        "firstName": "Iolo",
+        "lastName": "Hester",
+        "user": {
+          "$oid": "636d14545451a04e72d994bb"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae44"
+        }
+      },
+      {
+        "studentId": 100209,
+        "firstName": "Blossom",
+        "lastName": "Hill",
+        "user": {
+          "$oid": "636d14545451a04e72d994bc"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae45"
+        }
+      },
+      {
+        "studentId": 100284,
+        "firstName": "Kelsea",
+        "lastName": "Brewer",
+        "user": {
+          "$oid": "636d14545451a04e72d994bd"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae46"
+        }
+      }
+    ]
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d191368882aae23ebae47"
+  },
+  "isActive": false,
+  "module": {
+    "moduleId": "55-608212-AF-20223",
+    "name": "Human Factors",
+    "moduleLeader": {
+      "staffId": 800200,
+      "firstName": "Salahuddin",
+      "lastName": "Hooper",
+      "user": {
+        "$oid": "636d14545451a04e72d994c1"
+      }
+    }
+  },
+  "tutor": {
+    "staffId": 800201,
+    "firstName": "Julie",
+    "lastName": "Robbins",
+    "user": {
+      "$oid": "636d14545451a04e72d994bf"
+    }
+  },
+  "class": {
+    "startDate": "14/11/2022",
+    "duration": "9:00-1:00",
+    "students": [
+      {
+        "studentId": 100204,
+        "firstName": "Abdullah",
+        "lastName": "Malik",
+        "user": {
+          "$oid": "636d14545451a04e72d994b7"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae48"
+        }
+      },
+      {
+        "studentId": 100205,
+        "firstName": "Zain",
+        "lastName": "Whaid",
+        "user": {
+          "$oid": "636d14545451a04e72d994b8"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae49"
+        }
+      },
+      {
+        "studentId": 100206,
+        "firstName": "Bethany",
+        "lastName": "Green",
+        "user": {
+          "$oid": "636d14545451a04e72d994b9"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae4a"
+        }
+      },
+      {
+        "studentId": 100207,
+        "firstName": "Ammar",
+        "lastName": "Saeed",
+        "user": {
+          "$oid": "636d14545451a04e72d994ba"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae4b"
+        }
+      },
+      {
+        "studentId": 100208,
+        "firstName": "Iolo",
+        "lastName": "Hester",
+        "user": {
+          "$oid": "636d14545451a04e72d994bb"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae4c"
+        }
+      },
+      {
+        "studentId": 100209,
+        "firstName": "Blossom",
+        "lastName": "Hill",
+        "user": {
+          "$oid": "636d14545451a04e72d994bc"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae4d"
+        }
+      },
+      {
+        "studentId": 100284,
+        "firstName": "Kelsea",
+        "lastName": "Brewer",
+        "user": {
+          "$oid": "636d14545451a04e72d994bd"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae4e"
+        }
+      },
+      {
+        "studentId": 100200,
+        "firstName": "James",
+        "lastName": "Smith",
+        "user": {
+          "$oid": "636d14545451a04e72d994b1"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae4f"
+        }
+      },
+      {
+        "studentId": 100201,
+        "firstName": "John",
+        "lastName": "Smith",
+        "user": {
+          "$oid": "636d14545451a04e72d994b2"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae50"
+        }
+      },
+      {
+        "studentId": 100202,
+        "firstName": "John",
+        "lastName": "Doe",
+        "user": {
+          "$oid": "636d14545451a04e72d994b3"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae51"
+        }
+      },
+      {
+        "studentId": 100282,
+        "firstName": "Marge",
+        "lastName": "Simpson",
+        "user": {
+          "$oid": "636d14545451a04e72d994b4"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae52"
+        }
+      },
+      {
+        "studentId": 100283,
+        "firstName": "Homer",
+        "lastName": "Smith",
+        "user": {
+          "$oid": "636d14545451a04e72d994b5"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae53"
+        }
+      },
+      {
+        "studentId": 100284,
+        "firstName": "Susan",
+        "lastName": "Mayflower",
+        "user": {
+          "$oid": "636d14545451a04e72d994b6"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae54"
+        }
+      }
+    ]
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d191368882aae23ebae55"
+  },
+  "isActive": false,
+  "module": {
+    "moduleId": "55-608212-AF-20223",
+    "name": "Human Factors",
+    "moduleLeader": {
+      "staffId": 800200,
+      "firstName": "Salahuddin",
+      "lastName": "Hooper",
+      "user": {
+        "$oid": "636d14545451a04e72d994c1"
+      }
+    }
+  },
+  "tutor": {
+    "staffId": 800201,
+    "firstName": "Julie",
+    "lastName": "Robbins",
+    "user": {
+      "$oid": "636d14545451a04e72d994bf"
+    }
+  },
+  "class": {
+    "startDate": "17/11/2022",
+    "duration": "16:00-17:00",
+    "students": [
+      {
+        "studentId": 100204,
+        "firstName": "Abdullah",
+        "lastName": "Malik",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c1fa"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae56"
+        }
+      },
+      {
+        "studentId": 100205,
+        "firstName": "Zain",
+        "lastName": "Whaid",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c1fb"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae57"
+        }
+      },
+      {
+        "studentId": 100206,
+        "firstName": "Bethany",
+        "lastName": "Green",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c1fc"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae58"
+        }
+      },
+      {
+        "studentId": 100207,
+        "firstName": "Ammar",
+        "lastName": "Saeed",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c1fd"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae59"
+        }
+      },
+      {
+        "studentId": 100208,
+        "firstName": "Iolo",
+        "lastName": "Hester",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c1fe"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae5a"
+        }
+      },
+      {
+        "studentId": 100209,
+        "firstName": "Blossom",
+        "lastName": "Hill",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c1ff"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae5b"
+        }
+      },
+      {
+        "studentId": 100284,
+        "firstName": "Kelsea",
+        "lastName": "Brewer",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c200"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae5c"
+        }
+      },
+      {
+        "studentId": 100200,
+        "firstName": "James",
+        "lastName": "Smith",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c1f4"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae5d"
+        }
+      },
+      {
+        "studentId": 100201,
+        "firstName": "John",
+        "lastName": "Smith",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c1f5"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae5e"
+        }
+      },
+      {
+        "studentId": 100202,
+        "firstName": "John",
+        "lastName": "Doe",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c1f6"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae5f"
+        }
+      },
+      {
+        "studentId": 100282,
+        "firstName": "Marge",
+        "lastName": "Simpson",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c1f7"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae60"
+        }
+      },
+      {
+        "studentId": 100283,
+        "firstName": "Homer",
+        "lastName": "Smith",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c1f8"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae61"
+        }
+      },
+      {
+        "studentId": 100284,
+        "firstName": "Susan",
+        "lastName": "Mayflower",
+        "user": {
+          "$oid": "636cd4218f02b16c1699c1f9"
+        },
+        "hasRegistered": false,
+        "_id": {
+          "$oid": "636d191368882aae23ebae62"
+        }
+      }
+    ]
+  },
+  "__v": 0
+}]

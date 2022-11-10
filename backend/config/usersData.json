@@ -1,0 +1,196 @@
+[{
+  "_id": {
+    "$oid": "636d14545451a04e72d994b1"
+  },
+  "firstName": "James",
+  "lastName": "Smith",
+  "email": "100200@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994b2"
+  },
+  "firstName": "John",
+  "lastName": "Smith",
+  "email": "100201@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994b3"
+  },
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "100202@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994b4"
+  },
+  "firstName": "Marge",
+  "lastName": "Simpson",
+  "email": "100282@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994b5"
+  },
+  "firstName": "Homer",
+  "lastName": "Smith",
+  "email": "100283@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994b6"
+  },
+  "firstName": "Susan",
+  "lastName": "Mayflower",
+  "email": "100284@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994b7"
+  },
+  "firstName": "Abdullah",
+  "lastName": "Malik",
+  "email": "100204@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994b8"
+  },
+  "firstName": "Zain",
+  "lastName": "Whaid",
+  "email": "100205@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994b9"
+  },
+  "firstName": "Bethany",
+  "lastName": "Green",
+  "email": "100206@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994ba"
+  },
+  "firstName": "Ammar",
+  "lastName": "Saeed",
+  "email": "100207@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994bb"
+  },
+  "firstName": "Iolo",
+  "lastName": "Hester",
+  "email": "100208@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994bc"
+  },
+  "firstName": "Blossom",
+  "lastName": "Hill",
+  "email": "100209@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994bd"
+  },
+  "firstName": "Kelsea",
+  "lastName": "Brewer",
+  "email": "100285@student.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Student"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994bf"
+  },
+  "firstName": "Julie",
+  "lastName": "Robbins",
+  "email": "j.robbins@staff.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Staff",
+    "Tutor"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994c1"
+  },
+  "firstName": "Salahuddin",
+  "lastName": "Hooper",
+  "email": "s.hooper@staff.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Staff",
+    "Tutor",
+    "Module Leader"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "636d14545451a04e72d994c3"
+  },
+  "firstName": "Tom",
+  "lastName": "North",
+  "email": "t.north@admin.uops.ac.uk",
+  "hashedPassword": "$2b$08$34U0Wuzr58pJPguiZvO.su79XI6huH7ddu21Q0N6Vvonm29MuYRZm",
+  "roles": [
+    "Admin"
+  ],
+  "__v": 0
+}]

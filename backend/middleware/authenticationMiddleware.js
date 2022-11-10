@@ -71,7 +71,7 @@ class AuthenticationMiddleware {
         }
 
         // if length is bigger than 0, it means the user is a module leader
-        let isModuleLeader = req.user.roles.filter(r => r === 'Module leader').length > 0;
+        let isModuleLeader = req.user.roles.filter(r => r === 'Module Leader').length > 0;
 
         if (isModuleLeader == false) {
             // return unauthorized as user is not a ML

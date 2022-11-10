@@ -5,6 +5,7 @@ import LoginPage from './pages/Login.vue';
 import RegisterPage from './pages/Register.vue';
 import CodePage from './pages/Code.vue';
 import StaffPage from './pages/Staff.vue';
+import Registerspage from './pages/Registers.vue';
 import ManagePage from './pages/Manage.vue';
 import AdminPage from './pages/Admin.vue';
 import UsersPage from './pages/Users.vue';
@@ -28,7 +29,14 @@ const routes = [
     {
         path: '/staff',
         name: 'StaffPage',
-        component: StaffPage
+        component: StaffPage,
+        children: [
+            {
+                path: '',
+                name: 'RegistersPage',
+                component: Registerspage
+            }
+        ]
     },
     {
         path: '/staff/manage/:id',
