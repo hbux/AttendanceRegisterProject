@@ -78,17 +78,30 @@ class RegisterController {
             return res.status(400).send({ message: 'Register has already been activated.' });
         } 
 
-        // Create a random code for the register
-        let randomCode = Math.floor(Math.random() * 10000) + 1000;
+        let randomCode = 0;
+
+        do {
+            // Create a random code for the register
+            randomCode = Math.floor(Math.random() * 10000) + 1000;
+
+            // find a register with existing code
+            let existingCode = await Register.findOne({
+                code: randomCode
+            });
+
+            // code already exists
+            if (existingCode) {
+                randomCode = 0;
+            }
+
+        } while(randomCode == 0);
+        
 
         // Set the register status to active as the tutor has now activate it
         registerToUpdate.isActive = true;
         registerToUpdate.dateActivated = Date.now();
         registerToUpdate.code = randomCode;
 
-        // TODO
-        // Ensure code is not the same as any other register
-    
         // Mongoose tracks entity changes, these will now be updated in the database
         await registerToUpdate.save();
 
