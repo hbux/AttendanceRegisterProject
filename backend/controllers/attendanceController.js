@@ -19,7 +19,7 @@ class AttendanceController {
         // Regsiters can be ACTIVE (true/false), a tutor can activate a register which changes this to true
         if (register.isActive == false) {
             // Register not active
-            return res.status(404).send({ message: 'Register has not been opened yet, try again when the tutor has activated the register.' });
+            return res.status(404).send({ message: 'Register has not been activated yet, try again when the tutor has activated the register.' });
         }
 
         // Only a student who is timetabled for this class can register their attendance
@@ -49,14 +49,21 @@ class AttendanceController {
 
     // PUT /attendance/: this method updates a students attendance
     editStudentAttendance = asyncHandler(async(req, res) => {
-        let { registerId, studentId } = req.body;
+        let { registerId, student } = req.body;
         let user = req.user;
         
+        // Find the register by the ID
         let register = await Register.findById(registerId);
 
         // No register was found
         if (!register) {
             return res.status(404).send({ message: 'Unable to find register.' });
+        }
+
+        // Regsiters can be ACTIVE (true/false), a tutor can activate a register which changes this to true
+        if (register.isActive == false) {
+            // Register not active
+            return res.status(404).send({ message: 'Register has not been activated yet.' });
         }
 
         // Ensure the register tutor is the same as the tutor sending the request
@@ -65,21 +72,21 @@ class AttendanceController {
         }
 
         // Find the student on the register
-        let student = register.class.students.find(s => s.user == studentId);
+        let studentToUpdate = register.class.students.find(s => s.user == student.user);
 
         // No student found - they aren't listed in the timetable
-        if (!student) {
-            return res.status(403).send({ message: 'Registration code invalid.' });
+        if (!studentToUpdate) {
+            return res.status(403).send({ message: 'Student is not registered in this class.' });
         }
 
         // Set it to the opposite of what it current is
-        student.hasRegistered = !student.hasRegistered;
+        studentToUpdate.hasRegistered = !studentToUpdate.hasRegistered;
 
         // Save the change
         await register.save();
 
         // Nothing failed, changing student attendance succeeded.
-        return res.status(200).json(student);
+        return res.status(200).json(register.class.students);
     })
 }
 

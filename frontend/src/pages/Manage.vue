@@ -37,36 +37,39 @@
         </div>
     </div>
     <div class="container px-3">
-        <table class="table table-striped table-hover my-4">
-            <thead>
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Has registered</th>
-                <th scope="col">Mark student as</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(student, index) in register.class.students" :key="index">
-                    <th scope="row">{{index}}</th>
-                    <td>{{student.studentId}}</td>
-                    <td>{{student.firstName}} {{student.lastName}}</td>
-                    <td v-if="student.hasRegistered == true" class="text-success fw-bold">{{student.hasRegistered}}</td>
-                    <td v-else class="text-danger fw-bold ">{{student.hasRegistered}}</td>
-                    <td>
-                        <button v-if="student.hasRegistered == false" type="button" class="btn btn-outline-secondary mx-1">Here</button>
-                        <button v-if="student.hasRegistered == true" type="button" class="btn btn-outline-danger mx-1">Absent</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover my-4">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Has registered</th>
+                    <th scope="col">Mark student as</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(student, index) in register.class.students" :key="index">
+                        <th scope="row">{{index}}</th>
+                        <td>{{student.studentId}}</td>
+                        <td>{{student.firstName}} {{student.lastName}}</td>
+                        <td v-if="student.hasRegistered == true" class="text-success fw-bold">{{student.hasRegistered}}</td>
+                        <td v-else class="text-danger fw-bold ">{{student.hasRegistered}}</td>
+                        <td>
+                            <button v-if="student.hasRegistered == false" @click="handleEditStudentAttendance(student)" type="button" class="btn btn-outline-secondary mx-1">Here</button>
+                            <button v-if="student.hasRegistered == true" @click="handleEditStudentAttendance(student)" type="button" class="btn btn-outline-danger mx-1">Absent</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import registerService from '../services/registerService';
+import attendanceService from '../services/attendanceService';
 
 export default {
     name: 'ManagePage',
@@ -88,6 +91,16 @@ export default {
                 id: this.register._id
             }).then(response => {
                 this.register = response.data;
+            }).catch(error => {
+                this.errorMessage = error.response.data.message;
+            });
+        },
+        async handleEditStudentAttendance(student) {
+            await attendanceService.editStudentAttendanceAsync({
+                registerId: this.register._id,
+                student: student
+            }).then(response => {
+                this.register.class.students = response.data;
             }).catch(error => {
                 this.errorMessage = error.response.data.message;
             });
