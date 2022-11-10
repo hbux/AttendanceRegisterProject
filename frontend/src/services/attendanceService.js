@@ -1,16 +1,16 @@
 import axios from 'axios'
 
-class RegisterService {
-    apiUrl = 'http://localhost:3000/register/';
+class AttendanceService {
+    apiUrl = 'http://localhost:3000/attendance/';
     
-    async checkinCodeAsync(data) {
+    async registerCodeAsync(data) {
         const user = JSON.parse(localStorage.getItem('user'));
 
         if (user) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
         }
 
-        let urlTarget = this.apiUrl + 'code';
+        let urlTarget = this.apiUrl + 'register';
 
         let response = await axios.post(urlTarget, data);
 
@@ -38,7 +38,7 @@ class RegisterService {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
         }
 
-        let urlTarget = this.apiUrl + 'getall';
+        let urlTarget = this.apiUrl + 'registers/all';
 
         let response = await axios.get(urlTarget);
 
@@ -52,7 +52,7 @@ class RegisterService {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
         }
 
-        let urlTarget = this.apiUrl + 'get/' + id;
+        let urlTarget = this.apiUrl + 'registers/' + id;
 
         let response = await axios.get(urlTarget);
 
@@ -60,4 +60,4 @@ class RegisterService {
     }
 }
 
-export default new RegisterService();
+export default new AttendanceService();

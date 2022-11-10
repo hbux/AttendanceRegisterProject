@@ -1,8 +1,8 @@
 const asyncHandler = require('express-async-handler');
 const Register = require('../models/register');
 
-class RegisterController {
-    // POST /register/code: This code attempts to register the user in a class
+class AttendanceController {
+    // POST /attendance/register: This code attempts to register the user in a class
     registerCode = asyncHandler(async(req, res) => {
         // use deconstruction to get the code from the request body
         let { code } = req.body;
@@ -140,4 +140,4 @@ class RegisterController {
     })
 }
 
-module.exports = new RegisterController();
+module.exports = new AttendanceController();

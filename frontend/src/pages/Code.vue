@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import registerService from '../services/registerService';
+import attendanceService from '../services/attendanceService';
 
 export default {
     name: 'CodePage',
@@ -52,7 +52,7 @@ export default {
         async handleCode() {
             this.isLoading = true;
 
-            await registerService.checkinCodeAsync({
+            await attendanceService.registerCodeAsync({
                 code: this.code
             }).then(response => {
                 this.isLoading = false;

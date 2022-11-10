@@ -7,7 +7,7 @@ const logger = require('morgan');
 // Route dependencies
 const userRoute = require('./routes/userRoute');
 const roleRoute = require('./routes/roleRoute');
-const registerRoute = require('./routes/registerRoute');
+const attendanceRoute = require('./routes/attendanceRoute');
 const dataRoute = require('./routes/dataRoute');
 
 // Db config dependencies
@@ -35,7 +35,7 @@ app.use(logger('dev'));
 // Routes
 app.use('/user', userRoute);
 app.use('/role', roleRoute);
-app.use('/register', registerRoute);
+app.use('/attendance', attendanceRoute);
 app.use('/data', dataRoute);
 
 app.listen(port, console.log(`Server started on port: ${port}`));
