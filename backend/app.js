@@ -41,3 +41,5 @@ app.use('/register', registerRoute);
 app.use('/data', dataRoute);
 
 app.listen(port, console.log(`Server started on port: ${port}`));
+
+module.exports = app;

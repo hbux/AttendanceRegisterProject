@@ -1,6 +1,7 @@
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let app = require('../app');
+let should = chai.should();
 
 chai.use(chaiHttp);
 
@@ -12,7 +13,7 @@ describe('Testing block /role path', () => {
         it('Should return an array of roles', (done) => {
             
             chai.request(app)
-            .get('/role')
+            .get('/role/')
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
