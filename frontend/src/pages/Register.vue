@@ -2,10 +2,10 @@
     <div class="container">
         <form @submit.prevent="handleRegister" class="container my-4" style="max-width: 500px;">
             <div v-if="successMessage" class="alert alert-success" role="alert">
-                <strong>Success!</strong> {{successMessage}}
+                <strong>Success!</strong> {{ successMessage }}
             </div>
             <div v-if="errorMessage" class="alert alert-danger" role="alert">
-                <strong>Oops!</strong> {{errorMessage}}
+                <strong>Oops!</strong> {{ errorMessage }}
             </div>
             <div class="card">
                 <div class="card-header py-2" style="font-size: 2rem">
@@ -22,7 +22,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input v-model="email" type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <input v-model="email" type="email" name="email" class="form-control" id="email"
+                            aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3 col-12">
@@ -31,13 +32,15 @@
                     </div>
                     <div class="mb-3 col-12">
                         <label for="confirmPassword" class="form-label">Confirm password</label>
-                        <input v-model="confirmPassword" type="password" name="confirmPassword" class="form-control" id="confirmPassword">
+                        <input v-model="confirmPassword" type="password" name="confirmPassword" class="form-control"
+                            id="confirmPassword">
                     </div>
                     <div class="my-3">
                         <label for="password" class="form-label">Role of user</label>
-                        <select v-model="selectedRoles" multiple class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                        <select v-model="selectedRoles" multiple class="form-select form-select-lg mb-3"
+                            aria-label=".form-select-lg example">
                             <option disabled>Choose roles</option>
-                            <option v-for="(role, index) in roles" :key="index">{{role}}</option>
+                            <option v-for="(role, index) in roles" :key="index">{{ role }}</option>
                         </select>
                     </div>
 
@@ -60,6 +63,7 @@
 <script>
 import userService from '../services/userService';
 import roleService from '../services/roleService';
+
 
 export default {
     name: 'RegisterPage',

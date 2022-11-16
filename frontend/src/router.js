@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from 'vue-router';
 
+
 import HomePage from './pages/Home.vue';
 import LoginPage from './pages/Login.vue';
 import RegisterPage from './pages/Register.vue';
@@ -9,6 +10,8 @@ import Registerspage from './pages/Registers.vue';
 import ManagePage from './pages/Manage.vue';
 import AdminPage from './pages/Admin.vue';
 import UsersPage from './pages/Users.vue';
+
+
 
 const routes = [
     {
@@ -77,7 +80,9 @@ router.beforeEach((to, from, next) => {
     // redirect to login page
     if (authRequired && !loggedIn) {
         next('/login');
-    } else {
+    }
+
+    else {
         next();
     }
 })
