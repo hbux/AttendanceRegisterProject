@@ -20,10 +20,14 @@ const userTokens = {
 // 3. Test registering a code where the user is not part of the active register (should fail)
 // 4. Test registering a students attendance that has already registered their attendance (should fail)
 // 5. Test registering a students attendance successfully
-// 6. Test editing a students attendance with a fake register ID (should fail)
-// 7. Test editing a students attendance where register is not active (should fail)
-// 8. Test editing a students attendance where tutor is not part of the active register (should fail)
-// 9. Test editing a students attendance where the student is not part of the active register (should fail)
-// 10. Test successfully editing a students attendance
+// 6. Test registering a code without authentication (should fail)
+// 7. Test registering a code without student authorization (should fail)
+// 8. Test editing a students attendance with a fake register ID (should fail)
+// 9. Test editing a students attendance where register is not active (should fail)
+// 10. Test editing a students attendance where tutor is not part of the active register (should fail)
+// 11. Test editing a students attendance where the student is not part of the active register (should fail)
+// 12. Test editing a students attendance without authentication (should fail)
+// 13. Test editing a students attendance without tutor authorization (should fail)
+// 14. Test successfully editing a students attendance
 
 // Have a look how I did login and register tests in user.test.js if ur struggling
