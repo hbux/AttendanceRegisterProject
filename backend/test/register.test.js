@@ -22,6 +22,8 @@ const userTokens = {
 // 5. Test activating a register that has already been activated (should fail)
 // 6. Test activating a register successfully
 // 7. Test getting all the registers (should suceed)
-// 8. Test getting 1 register (should succeed)
+// 8. Test getting 1 register with invalid regsiter ID (should fail)
+// 9. Test getting 1 register where the user is not the tutor of the register (should fail)
+// 10. Test getting 1 register successfully 
 
 // Have a look how I did login and register tests in user.test.js if ur struggling
