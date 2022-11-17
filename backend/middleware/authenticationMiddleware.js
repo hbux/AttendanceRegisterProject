@@ -21,7 +21,7 @@ class AuthenticationMiddleware {
             next();
         } catch (error) {
             // Something failed so the request is not authorized
-            return res.status(401).send({ message: 'Token invalid. Unauthorized.' });
+            return res.status(403).send({ message: 'Token invalid. Unauthorized.' });
         }
     })
 
@@ -29,7 +29,7 @@ class AuthenticationMiddleware {
     ensureAdmin = asyncHandler(async(req, res, next) => {
         // If no roles exist, user is not authorized for admin resources
         if (!req.user.roles) {
-            return res.status(403).send({ message: 'User is not authorized to access student resources.' });
+            return res.status(403).send({ message: 'User is not authorized to access admin resources.' });
         }
 
         // if length is bigger than 0, it means the user is an admin
