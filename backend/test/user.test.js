@@ -239,27 +239,127 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing an register request
-    describe('POST /user/register', () => {
-        it('Should succeed with creating an account', (done) => {
-            let registerDetails = {
-                firstName: 'Tester',
-                lastName: 'Testing',
-                email: 't.testing@testing.uops.ac.uk',
-                password: '12345',
-                confirmPassword: '12345',
-                roles: ['Test']
+    // Testing an unauthenticated user edit request
+    describe('PUT /user/', () => {
+        it('Should fail without user authentication', (done) => {
+            let editStudentDetails = {
+                id: '636d14545451a04e72d994b8',
+                firstName: 'Zain',
+                lastName: 'Whaid',
+                email: '100205@student.uops.ac.uk',
+                roles: ['Student']
+            }
+
+            chai.request(app)
+            .put('/user/')
+            .send(editStudentDetails)
+            .end((error, res) => {
+                res.should.have.status(403)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Token invalid. Unauthorized.');
+
+                done();
+            })
+        })
+    });
+
+    // Testing an unauthorized user edit request
+    describe('PUT /user/', () => {
+        it('Should fail without user authentication', (done) => {
+            let editStudentDetails = {
+                id: '636d14545451a04e72d994b8',
+                firstName: 'Zain',
+                lastName: 'Whaid',
+                email: '100205@student.uops.ac.uk',
+                roles: ['Student']
             }
 
             chai.request(app)
             .post('/user/register')
+            .set('Authorization', userTokens.studentToken)
+            .send(editStudentDetails)
+            .end((error, res) => {
+                res.should.have.status(403)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('User is not authorized to access admin resources.');
+
+                done();
+            })
+        })
+    });
+
+    // Testing an invalid edit request
+    describe('PUT /user/', () => {
+        it('Should fail without firstName field', (done) => {
+            let editStudentDetails = {
+                id: '636d14545451a04e72d994b8',
+                firstName: '',
+                lastName: 'Whaid',
+                email: '100205@student.uops.ac.uk',
+                roles: ['Student']
+            }
+
+            chai.request(app)
+            .put('/user/')
             .set('Authorization', userTokens.adminToken)
-            .send(registerDetails)
+            .send(editStudentDetails)
+            .end((error, res) => {
+                res.should.have.status(400)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Please enter all fields.');
+
+                done();
+            })
+        })
+    });
+
+    // Testing an invalid edit request
+    describe('PUT /user/', () => {
+        it('Should fail with invalid student id', (done) => {
+            let editStudentDetails = {
+                id: '636d14545451a04e72d994c5',
+                firstName: 'Zain',
+                lastName: 'Whaid',
+                email: '100205@student.uops.ac.uk',
+                roles: ['Student']
+            }
+
+            chai.request(app)
+            .put('/user/')
+            .set('Authorization', userTokens.adminToken)
+            .send(editStudentDetails)
+            .end((error, res) => {
+                res.should.have.status(403)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Unauthorized to update this user.');
+
+                done();
+            })
+        })
+    });
+
+    // Testing a successful edit request
+    describe('PUT /user/', () => {
+        it('Should succeed in editing student', (done) => {
+            let editStudentDetails = {
+                id: '636d14545451a04e72d994b8',
+                firstName: 'Zain',
+                lastName: 'Whaid',
+                email: '100205@student.uops.ac.uk',
+                roles: ['Student']
+            }
+
+            chai.request(app)
+            .put('/user/')
+            .set('Authorization', userTokens.adminToken)
+            .send(editStudentDetails)
             .end((error, res) => {
                 res.should.have.status(200)
                 res.body.should.be.a('object')
-                res.body.should.have.property('message')
-                res.body.message.should.be.eql('Thanks, your account has been created.');
 
                 done();
             })

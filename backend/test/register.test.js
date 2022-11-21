@@ -14,20 +14,58 @@ const userTokens = {
     studentToken: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNmQxNDU0NTQ1MWEwNGU3MmQ5OTRiMSIsImVtYWlsIjoiMTAwMjAwQHN0dWRlbnQudW9wcy5hYy51ayIsInJvbGVzIjpbIlN0dWRlbnQiXSwiaWF0IjoxNjY4Njg3NTIwfQ.atXjTwbXykRe7bjTBOpOO-yzZOY4WYteEc1CYiEv-pA"
 }
 
-// TODO:
-// 1. Test activating a register without authentication (should fail)
-// 2. Test activating a register without tutor authorization (should fail)
-// 3. Test activating a register with an invalid register ID (should fail)
-// 4. Test activating a register where the user is not the tutor of the register (should fail)
-// 5. Test activating a register that has already been activated (should fail)
-// 6. Test activating a register successfully
-// 7. Test getting all the registers without authentication (should fail)
-// 8. Test getting all the registers without tutor authorization (should fail)
-// 9. Test getting all the registers (should suceed)
-// 10. Test getting a register without authentication (should fail)
-// 11. Test getting 1 register without tutor authorization (should fail)
-// 12. Test getting 1 register with invalid regsiter ID (should fail)
-// 13. Test getting 1 register where the user is not the tutor of the register (should fail)
-// 14. Test getting 1 register successfully 
+// Testing the register controller
+describe('Testing block /register path', () => {
 
-// Have a look how I did login and register tests in user.test.js if ur struggling
+    // Testing an unauthenticated get all registers request
+    describe('GET /register/get/all', () => {
+        it('Should fail without authentication', (done) => {
+
+            chai.request(app)
+            .get('/register/get/all')
+            .end((error, res) => {
+                res.should.have.status(403)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Token invalid. Unauthorized.');
+
+                done();
+            })
+        })
+    });
+
+    // Testing an unauthorized get all registers request
+    describe('GET /register/get/all/', () => {
+        it('Should fail without authorization', (done) => {
+            
+            chai.request(app)
+            .get('/register/get/all')
+            .set('Authorization', userTokens.studentToken)
+            .end((error, res) => {
+                res.should.have.status(403)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('User is not authorized to access tutor resources.');
+
+                done();
+            })
+        })
+    });
+
+     // Testing a succesful get all registers request
+    describe('GET /register/', () => {
+        it('Should succeed', (done) => {
+            
+            chai.request(app)
+            .get('/register/get/all')
+            .set('Authorization', userTokens.tutorToken)
+            .end((error, res) => {
+                res.should.have.status(200)
+                res.body.should.be.a('array')
+                res.body.length.should.not.be.eql(0);
+
+                done();
+            })
+        })
+    });
+});

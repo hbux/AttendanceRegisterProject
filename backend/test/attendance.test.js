@@ -14,162 +14,190 @@ const userTokens = {
     studentToken: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNmQxNDU0NTQ1MWEwNGU3MmQ5OTRiMSIsImVtYWlsIjoiMTAwMjAwQHN0dWRlbnQudW9wcy5hYy51ayIsInJvbGVzIjpbIlN0dWRlbnQiXSwiaWF0IjoxNjY4Njg3NTIwfQ.atXjTwbXykRe7bjTBOpOO-yzZOY4WYteEc1CYiEv-pA"
 }
 
-// TODO:
-// 1. Test registering a code that is invalid (should fail)
-// Testing for a wrong registration code
-describe('POST/checkin-code', () => {
-    it('Should fail without correct code', (done) => {
-        let incorrectCode  = {
-            
-            code: '1845'
-        }
+// Testing the attendance controller
+describe('Testing block /attendance path', () => {
 
-        chai.request(app)
-        .post('/code/register-attendance')
-        .send(incorrectCode)
-        .end((error, res) => {
-            res.should.have.status(404)
-            res.body.should.be.a('object')
-            res.body.should.have.property('message')
-            res.body.message.should.be.eql('Oops! Registration code invalid..');
+    // Testing an unauthenticated register code request
+    describe('POST /attendance/', () => {
+        it('Should fail without authentication', (done) => {
+            let registerCode = {
+                code: '1931'
+            }
             
-            done();
-        })
-    })
-});
-// 2. Test registering a code where the user is not part of the active register (should fail)
-// testing for when a staff tries to register attendance
-describe('POST/attendance', () => {
-    it('Should fail even with the correct code', (done) => {
-        let correctCode  = {
-            
-            code: '1844'
-        }
-
-        chai.request(app)
-        .post('/attendance')
-        .send(correctCode)
-        .end((error, res) => {
-            res.should.have.status(403)
-            res.body.should.be.a('object')
-            res.body.should.have.property('message')
-            res.body.message.should.be.eql('Oops! User is not authorized to access student resources.');
-            
-            done();
-        })
-    })
-});
-// 3. Test registering a code when register has not been activated (should fail)
-describe('POST/checkin-code', () => {
-    it('Should fail without correct code', (done) => {
-        let incorrectCode  = {
-            
-            code: '1845'
-        }
-
-        chai.request(app)
-        .post('/code/register-attendance')
-        .send(incorrectCode)
-        .end((error, res) => {
-            res.should.have.status(404)
-            res.body.should.be.a('object')
-            res.body.should.have.property('message')
-            res.body.message.should.be.eql('Oops! Registration code invalid..');
-            
-            done();
-        })
-    })
-});
-
-// 4. Test registering a students attendance that has already registered their attendance (should fail)
-//testing for a student that has already been registered
-describe('post/attendance',() => {
-    it('should fail and give reason for failing', (done) => {
-        let attendanceDetails={
-           
-            code: '1844'
-
-        }
-
-        chai.request(app)
-        .post('/attendance')
-        .send(attendanceDetails)
-        .end((error, res) => {
-            res.should.have.status(400)
-            res.body.should.be.a('object')
-            res.body.should.have.property('message')
-            res.body.message.should.be.eql('Oops! You have already registered your attendance for this class.');
-            
-            done();
-        })
-    })
-})
-// 5. Test registering a students attendance successfully
-// Testing a succesful attendance registation
-describe('POST /attendance', () => {
-    it('Should succesfully register attendance', (done) => {
-        let correctCode = {
-              code:1844
-        }
-        
-        chai.request(app)
-            .post('/attendance')
-            .send(correctCode)
-            .end((error, res) => {
-                res.should.have.status(200)
-                res.body.should.be.a('object')
-                res.body.should.have.property('message')
-                res.body.message.should.be.eql('Success! Successfully registered your attendance for this class.');
-                
-                done();
-            })
-    })
-});
-// 6. Test registering a code without authentication (should fail)
-// 7. Test registering a code without student authorization (should fail)
-// 8. Test editing a students attendance with a fake register ID (should fail)
-// 9. Test editing a students attendance where register is not active (should fail)
-// 10. Test editing a students attendance where tutor is not part of the active register (should fail)
-// 11. Test editing a students attendance where the student is not part of the active register (should fail)
-// 12. Test editing a students attendance without authentication (should fail)
-// 13. Test editing a students attendance without tutor authorization (should fail)
-describe('PUT /attendance', () => {
-    it('Should fail and give reason', (done) => {
-        let statusChanged = {
-              edit:absent
-        }
-        
-        chai.request(app)
-            .put('/attendance')
-            .send(statusChanged)
+            chai.request(app)
+            .post('/attendance/')
+            .send(registerCode)
             .end((error, res) => {
                 res.should.have.status(403)
                 res.body.should.be.a('object')
-                res.body.should.have.property('false')
-                res.body.message.should.be.eql('Oops! User is not authorized to access tutor resources.');
-                
-                done();
-            })
-    })
-});
-// 14. Test successfully editing a students attendance
-describe('PUT /attendance', () => {
-    it('Should succesfully edit attendance', (done) => {
-        let statusChanged = {
-             edit:present
-        }
-        
-        chai.request(app)
-            .put('/attendance')
-            .send(statusChanged)
-            .end((error, res) => {
-                res.should.have.status(200)
-                res.body.should.be.a('object')
-                res.body.should.have.property('true')
-               
-                done();
-            })
-    })
-});
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Token invalid. Unauthorized.');
 
-// Have a look how I did login and register tests in user.test.js if ur struggling
+                done();
+            })
+        })
+    });
+
+    // Testing an unauthorized register code request
+    describe('POST /attendance/', () => {
+        it('Should fail without authorization', (done) => {
+            let registerCode = {
+                code: '1931'
+            }
+            
+            chai.request(app)
+            .post('/attendance/')
+            .set('Authorization', userTokens.tutorToken)
+            .send(registerCode)
+            .end((error, res) => {
+                res.should.have.status(403)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('User is not authorized to access student resources.');
+
+                done();
+            })
+        })
+    });
+
+     // Testing an invalid register code request
+     describe('POST /attendance/', () => {
+        it('Should fail with invalid register code', (done) => {
+            let registerCode = {
+                code: '1931'
+            }
+            
+            chai.request(app)
+            .post('/attendance/')
+            .set('Authorization', userTokens.studentToken)
+            .send(registerCode)
+            .end((error, res) => {
+                res.should.have.status(404)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Registration code invalid.');
+
+                done();
+            })
+        })
+    });
+
+    // Testing an unauthenticated edit student attendance request
+    describe('PUT /attendance/', () => {
+        it('Should fail without authentication', (done) => {
+            let editRequest = {
+                registerId: '636d191368882aae23ebae38',
+                student: {
+                    studentId: '100200',
+                    firstName: "James",
+                    lastName: "Smith",
+                    user: '636d14545451a04e72d994b1',
+                    hasRegistered: false,
+                    _id: '636d191368882aae23ebae39'
+                }
+            }
+            
+            chai.request(app)
+            .put('/attendance/')
+            .send(editRequest)
+            .end((error, res) => {
+                res.should.have.status(403)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Token invalid. Unauthorized.');
+
+                done();
+            })
+        })
+    });
+
+    // Testing an unauthorized edit student attendance request
+    describe('PUT /attendance/', () => {
+        it('Should fail without authorization', (done) => {
+            let editRequest = {
+                registerId: '636d191368882aae23ebae38',
+                student: {
+                    studentId: '100200',
+                    firstName: "James",
+                    lastName: "Smith",
+                    user: '636d14545451a04e72d994b1',
+                    hasRegistered: false,
+                    _id: '636d191368882aae23ebae39'
+                }
+            }
+            
+            chai.request(app)
+            .put('/attendance/')
+            .set('Authorization', userTokens.studentToken)
+            .send(editRequest)
+            .end((error, res) => {
+                res.should.have.status(403)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('User is not authorized to access tutor resources.');
+
+                done();
+            })
+        })
+    });
+
+    // Testing editing a student when register is not active
+    describe('PUT /attendance/', () => {
+        it('Should fail when register is not', (done) => {
+            let editRequest = {
+                registerId: '636d191368882aae23ebae38',
+                student: {
+                    studentId: '100200',
+                    firstName: "James",
+                    lastName: "Smith",
+                    user: '636d14545451a04e72d994b1',
+                    hasRegistered: false,
+                    _id: '636d191368882aae23ebae39'
+                }
+            }
+            
+            chai.request(app)
+            .put('/attendance/')
+            .set('Authorization', userTokens.tutorToken)
+            .send(editRequest)
+            .end((error, res) => {
+                res.should.have.status(404)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Register has not been activated yet.');
+
+                done();
+            })
+        })
+    });
+
+    // Testing editing a student when register id is invalid
+    describe('PUT /attendance/', () => {
+        it('Should fail with invalid register id', (done) => {
+            let editRequest = {
+                registerId: '636d191368882aae23ebae44',
+                student: {
+                    studentId: '100200',
+                    firstName: "James",
+                    lastName: "Smith",
+                    user: '636d14545451a04e72d994b1',
+                    hasRegistered: false,
+                    _id: '636d191368882aae23ebae39'
+                }
+            }
+            
+            chai.request(app)
+            .put('/attendance/')
+            .set('Authorization', userTokens.tutorToken)
+            .send(editRequest)
+            .end((error, res) => {
+                res.should.have.status(404)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Unable to find register.');
+
+                done();
+            })
+        })
+    });
+});

@@ -86,7 +86,7 @@ class AuthenticationMiddleware {
     ensureTutor = asyncHandler(async(req, res, next) => {
         // If no roles exist, user is not authorized for tutor resources
         if (!req.user.roles) {
-            return res.status(403).send({ message: 'User is not authorized to access student resources.' });
+            return res.status(403).send({ message: 'User is not authorized to access tutor resources.' });
         }
 
         // if length is bigger than 0, it means the user is a tutor
