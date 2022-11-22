@@ -31,7 +31,7 @@ class RegisterService {
         return response;
     }
 
-    async getRegisterAsync(id) {
+    async viewCohortAttendanceAsync(id) {
         const user = JSON.parse(localStorage.getItem('user'));
         
         if (user) {

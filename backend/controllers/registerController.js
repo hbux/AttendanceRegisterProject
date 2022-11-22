@@ -72,7 +72,7 @@ class RegisterController {
     })
 
     // GET /attendance/get/:id: this method gets a register by registerId
-    getRegister = asyncHandler(async(req, res) => {
+    viewCohortAttendance = asyncHandler(async(req, res) => {
         // Retrieve id from parameters
         let id = req.params.id;
         let user = req.user;

@@ -88,4 +88,21 @@ describe('Testing block /register path', () => {
             })
         })
     });
+
+    // Testing view cohort attendance
+    describe('GET /register/:id', () => {
+        it('Should return a register', (done) => {
+            let id = '636d191368882aae23ebae38';
+            
+            chai.request(app)
+            .get(`/register/get/${id}`)
+            .set('Authorization', userTokens.moduleLeaderToken)
+            .end((error, res) => {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+
+                done();
+            })
+        })
+    });
 });

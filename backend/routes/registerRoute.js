@@ -7,7 +7,7 @@ const registerController = require('../controllers/registerController');
 
 // Http requests
 router.get('/get/all', auth.ensureAuthenticated, auth.ensureTutor, registerController.getRegisters);
-router.get('/get/:id', auth.ensureAuthenticated, auth.ensureTutor, registerController.getRegister);
+router.get('/get/:id', auth.ensureAuthenticated, auth.ensureTutor, registerController.viewCohortAttendance);
 router.put('/activate', auth.ensureAuthenticated, auth.ensureTutor, registerController.activateRegister);
 
 module.exports = router;

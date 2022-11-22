@@ -107,7 +107,7 @@ export default {
         }
     },
     async created() {
-        await registerService.getRegisterAsync(this.id)
+        await registerService.viewCohortAttendanceAsync(this.id)
             .then(response => {
                 this.register = response.data;
             }).catch(error => {
