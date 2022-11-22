@@ -82,6 +82,28 @@ describe('Testing block /attendance path', () => {
         })
     });
 
+    // Testing a successful register code request
+    describe('POST /attendance/', () => {
+        it('Should successfully register student attendance', (done) => {
+            let registerCode = {
+                code: '4476'
+            }
+            
+            chai.request(app)
+            .post('/attendance/')
+            .set('Authorization', userTokens.studentToken)
+            .send(registerCode)
+            .end((error, res) => {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Successfully registered your attendance for this class.');
+
+                done();
+            })
+        })
+    });
+
     // Testing an unauthenticated edit student attendance request
     describe('PUT /attendance/', () => {
         it('Should fail without authentication', (done) => {
@@ -135,36 +157,6 @@ describe('Testing block /attendance path', () => {
                 res.body.should.be.a('object')
                 res.body.should.have.property('message')
                 res.body.message.should.be.eql('User is not authorized to access tutor resources.');
-
-                done();
-            })
-        })
-    });
-
-    // Testing editing a student when register is not active
-    describe('PUT /attendance/', () => {
-        it('Should fail when register is not', (done) => {
-            let editRequest = {
-                registerId: '636d191368882aae23ebae38',
-                student: {
-                    studentId: '100200',
-                    firstName: "James",
-                    lastName: "Smith",
-                    user: '636d14545451a04e72d994b1',
-                    hasRegistered: false,
-                    _id: '636d191368882aae23ebae39'
-                }
-            }
-            
-            chai.request(app)
-            .put('/attendance/')
-            .set('Authorization', userTokens.tutorToken)
-            .send(editRequest)
-            .end((error, res) => {
-                res.should.have.status(404)
-                res.body.should.be.a('object')
-                res.body.should.have.property('message')
-                res.body.message.should.be.eql('Register has not been activated yet.');
 
                 done();
             })

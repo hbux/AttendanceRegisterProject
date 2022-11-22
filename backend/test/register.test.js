@@ -52,7 +52,7 @@ describe('Testing block /register path', () => {
         })
     });
 
-     // Testing a succesful get all registers request
+    // Testing a succesful get all registers request
     describe('GET /register/', () => {
         it('Should succeed', (done) => {
             
@@ -63,6 +63,26 @@ describe('Testing block /register path', () => {
                 res.should.have.status(200)
                 res.body.should.be.a('array')
                 res.body.length.should.not.be.eql(0);
+
+                done();
+            })
+        })
+    });
+
+    // Testing a succesful register activation
+    describe('PUT /register/', () => {
+        it('Should activate a register', (done) => {
+            let body = {
+                id: '636d191368882aae23ebae3f'
+            }
+            
+            chai.request(app)
+            .put('/register/activate')
+            .send(body)
+            .set('Authorization', userTokens.tutorToken)
+            .end((error, res) => {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
 
                 done();
             })
