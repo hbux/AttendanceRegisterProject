@@ -12,6 +12,12 @@ class UserService {
     }
 
     async registerAsync(data) {
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (user) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token; 
+        }
+        
         let urlTarget = this.apiUrl + 'register';
 
         let response = await axios.post(urlTarget, data);
