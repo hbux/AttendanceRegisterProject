@@ -17,9 +17,64 @@ const userTokens = {
 // Testing the attendance controller
 describe('Testing block /attendance path', () => {
 
-    // Testing an unauthenticated register code request
+    // Requirement 001 (R001): Testing that registering a user/student's attendance of a register with a valid code and valid authentication and authorization works as expected
+    // To register a code you MUST be logged in and be a student of the system.
+    // The student must also be present in the register to be able to register their attendance.
     describe('POST /attendance/', () => {
-        it('Should fail without authentication', (done) => {
+        it('Requirement 001 (R001): Should successfully register student attendance of a register with a valid code, valid authentication and valid authorization.', (done) => {
+            let registerCode = {
+                code: '8794'
+            }
+            
+            chai.request(app)
+            .post('/attendance/')
+            .set('Authorization', userTokens.studentToken)
+            .send(registerCode)
+            .end((error, res) => {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Successfully registered your attendance for this class.');
+
+                done();
+            })
+        })
+    });
+
+    // Requirement 004 (R004): Testing that editing a user/student's attendance of a register with a valid code and valid authentication and authorization works as expected
+    // To edit a student's attendance in a register a code you MUST be logged in and be a tutor of the system.
+    // The tutor must also be a tutor of the class in the register to be able to edit their attendance.
+    describe('PUT /attendance/', () => {
+        it('Requirement 004 (R004): Should successfully edit a students attendance in a register with valid details and valid authentication and authorization.', (done) => {
+            let editRequest = {
+                registerId: '636d191368882aae23ebae38',
+                student: {
+                    studentId: '100200',
+                    firstName: "James",
+                    lastName: "Smith",
+                    user: '636d14545451a04e72d994b1',
+                    hasRegistered: false,
+                    _id: '636d191368882aae23ebae39'
+                }
+            }
+            
+            chai.request(app)
+            .put('/attendance/')
+            .set('Authorization', userTokens.moduleLeaderToken)
+            .send(editRequest)
+            .end((error, res) => {
+                res.should.have.status(200)
+
+                done();
+            })
+        })
+    });
+
+    // Testing that registering a code without being logged in does not allow the user to pass the middleware
+    // To register a code you MUST be logged in and be a student of the system.
+    // The student must also be present in the register to be able to register their attendance.
+    describe('POST /attendance/', () => {
+        it('Should fail to register the users attendance of the register without being logged in.', (done) => {
             let registerCode = {
                 code: '1931'
             }
@@ -38,9 +93,11 @@ describe('Testing block /attendance path', () => {
         })
     });
 
-    // Testing an unauthorized register code request
+    // Testing that registering a code without having a role of student does not allow the user to pass the middleware
+    // To register a code you MUST be logged in and be a student of the system.
+    // The student must also be present in the register to be able to register their attendance.
     describe('POST /attendance/', () => {
-        it('Should fail without authorization', (done) => {
+        it('Should fail to register the users attendance of the register without having a role of student.', (done) => {
             let registerCode = {
                 code: '1931'
             }
@@ -60,9 +117,11 @@ describe('Testing block /attendance path', () => {
         })
     });
 
-     // Testing an invalid register code request
+    // Testing that registering an invalid code (a code that does not exist) does not allow the user to reigster their attendance.
+    // To register a code you MUST be logged in and be a student of the system.
+    // The student must also be present in the register to be able to register their attendance.
      describe('POST /attendance/', () => {
-        it('Should fail with invalid register code', (done) => {
+        it('Should fail to register the users attendance of the register using an invalid code', (done) => {
             let registerCode = {
                 code: '1931'
             }
@@ -82,31 +141,11 @@ describe('Testing block /attendance path', () => {
         })
     });
 
-    // Testing a successful register code request
-    describe('POST /attendance/', () => {
-        it('Should successfully register student attendance', (done) => {
-            let registerCode = {
-                code: '4476'
-            }
-            
-            chai.request(app)
-            .post('/attendance/')
-            .set('Authorization', userTokens.studentToken)
-            .send(registerCode)
-            .end((error, res) => {
-                res.should.have.status(200)
-                res.body.should.be.a('object')
-                res.body.should.have.property('message')
-                res.body.message.should.be.eql('Successfully registered your attendance for this class.');
-
-                done();
-            })
-        })
-    });
-
-    // Testing an unauthenticated edit student attendance request
+    // Testing that editing a students attendance in a register without being logged in does not allow the user to pass the middleware
+    // To edit a student's attendance in a register a code you MUST be logged in and be a tutor of the system.
+    // The tutor must also be a tutor of the class in the register to be able to edit their attendance.
     describe('PUT /attendance/', () => {
-        it('Should fail without authentication', (done) => {
+        it('Should fail to edit a students attendance in a register without being logged in.', (done) => {
             let editRequest = {
                 registerId: '636d191368882aae23ebae38',
                 student: {
@@ -133,9 +172,11 @@ describe('Testing block /attendance path', () => {
         })
     });
 
-    // Testing an unauthorized edit student attendance request
+    // Testing that editing a students attendance in a register without having a role of tutor does not allow the user to pass the middleware
+    // To edit a student's attendance in a register a code you MUST be logged in and be a tutor of the system.
+    // The tutor must also be a tutor of the class in the register to be able to edit their attendance.
     describe('PUT /attendance/', () => {
-        it('Should fail without authorization', (done) => {
+        it('Should fail to edit a students attendance of a register without having a role of tutor.', (done) => {
             let editRequest = {
                 registerId: '636d191368882aae23ebae38',
                 student: {
@@ -163,9 +204,11 @@ describe('Testing block /attendance path', () => {
         })
     });
 
-    // Testing editing a student when register id is invalid
+    // Testing that editing a students attendance in a register without providing a valid registerID does not succeed.
+    // To edit a student's attendance in a register a code you MUST be logged in and be a tutor of the system.
+    // The tutor must also be a tutor of the class in the register to be able to edit their attendance.
     describe('PUT /attendance/', () => {
-        it('Should fail with invalid register id', (done) => {
+        it('Should fail to edit a students attendance in a register with an invalid register ID.', (done) => {
             let editRequest = {
                 registerId: '636d191368882aae23ebae44',
                 student: {

@@ -15,11 +15,11 @@ const userTokens = {
 }
 
 // Testing the user controller
-describe('Testing block /user path', () => {
+describe('Testing all of the User Controller', () => {
 
-    // Testing a succesful login request
+    // Testing that the system logs the user in when provided a valid email and password
     describe('POST /user/login', () => {
-        it('Should succesfully return username and access token', (done) => {
+        it('Should log the user in successfully by returning a username and access_token when provided a valid email and password.', (done) => {
             let loginDetails = {
                 email: '100200@student.uops.ac.uk',
                 password: '12345'
@@ -39,9 +39,62 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing a missing details login request
+    // Testing that the system registers a new user when providing valid details with valid authentication and authorization
+    // To register a new user you MUST be logged in and be an admin of the system
+    describe('POST /user/register', () => {
+        it('Should register a new user when providing valid details and valid authentication and authorization.', (done) => {
+            let registerDetails = {
+                firstName: 'Tester',
+                lastName: 'Testing',
+                email: 'test@test.uops.ac.uk',
+                password: '12345',
+                confirmPassword: '12345',
+                roles: ['Test']
+            }
+
+            chai.request(app)
+            .post('/user/register')
+            .set('Authorization', userTokens.adminToken)
+            .send(registerDetails)
+            .end((error, res) => {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Thanks, your account has been created.');
+
+                done();
+            })
+        })
+    });
+
+    // Testing that the system edits an existing user when providing valid details with valid authentication and authorization
+    // To edit an existing user you MUST be logged in and be an admin of the system
+    describe('PUT /user/', () => {
+        it('Should edit an existing user successfully when provided valid details and valid authentication and authorization.', (done) => {
+            let editStudentDetails = {
+                id: '636d14545451a04e72d994b8',
+                firstName: 'Zain',
+                lastName: 'Whaid',
+                email: '100205@student.uops.ac.uk',
+                roles: ['Student']
+            }
+
+            chai.request(app)
+            .put('/user/')
+            .set('Authorization', userTokens.adminToken)
+            .send(editStudentDetails)
+            .end((error, res) => {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+
+                done();
+            })
+        })
+    });
+
+    // Testing that the fails to log the user in when provided an invalid email and a valid password
     describe('POST /user/login', () => {
-        it('Should fail without email field', (done) => {
+        it('Should fail to log the user in when provided an invalid email and a valid password.', (done) => {
             let loginDetails = {
                 email: '',
                 password: '12345'
@@ -61,9 +114,9 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing a missing details login request
+    // Testing that the fails to log the user in when provided a valid email but an invalid password
     describe('POST /user/login', () => {
-        it('Should fail without password field', (done) => {
+        it('Should fail to log the user in when provided a valid email but an invalid password.', (done) => {
             let loginDetails = {
                 email: '100200@student.uops.ac.uk',
                 password: ''
@@ -83,9 +136,9 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing an invalid login request
+    // Testing that the fails to log the user in when provided an email and password that does not match a user
     describe('POST /user/login', () => {
-        it('Should fail to login', (done) => {
+        it('Should fail to log the user in when provided a valid email and password that does not match an account.', (done) => {
             let loginDetails = {
                 email: 'test@test.com',
                 password: '12345'
@@ -105,9 +158,10 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing regsiter without authentication
+    // Testing that registering a user without being logged in does not allow the user to pass the middleware
+    // To register a new user you MUST be logged in and be an admin of the system
     describe('POST /user/register', () => {
-        it('Should fail without user authentication', (done) => {
+        it('Should fail to register a new user without being logged in.', (done) => {
             let registerDetails = {
                 firstName: 'Tester',
                 lastName: 'Testing',
@@ -131,9 +185,10 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing register without authorization
+    // Testing that registering a user without having an admin role does not allow the user to pass the middleware
+    // To register a new user you MUST be logged in and be an admin of the system
     describe('POST /user/register', () => {
-        it('Should fail without admin authorization', (done) => {
+        it('Should fail to register a new user without having an admin role when logged in.', (done) => {
             let registerDetails = {
                 firstName: 'Tester',
                 lastName: 'Testing',
@@ -158,9 +213,10 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing an invalid register request
+    // Testing that registering a user without having a first name field does not allow the user to register a new user
+    // To register a new user you MUST be logged in and be an admin of the system
     describe('POST /user/register', () => {
-        it('Should fail without firstName field', (done) => {
+        it('Should fail to register a new user when provided an invalid first name.', (done) => {
             let registerDetails = {
                 firstName: '',
                 lastName: 'Testing',
@@ -185,9 +241,10 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing an invalid register request
+    // Testing that registering a user without having matching passwords does not allow the user to register a new user
+    // To register a new user you MUST be logged in and be an admin of the system
     describe('POST /user/register', () => {
-        it('Should fail without matching passwords', (done) => {
+        it('Should fail to register a new user when provided passwords that do not match.', (done) => {
             let registerDetails = {
                 firstName: 'Tester',
                 lastName: 'Testing',
@@ -212,9 +269,10 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing an invalid register request
+    // Testing that registering a user with an email that already exists does not allow the user to register a new user
+    // To register a new user you MUST be logged in and be an admin of the system
     describe('POST /user/register', () => {
-        it('Should fail with existing email', (done) => {
+        it('Should fail to register a new user when provided an email that already matches an existing account.', (done) => {
             let registerDetails = {
                 firstName: 'Tester',
                 lastName: 'Testing',
@@ -239,9 +297,10 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing an unauthenticated user edit request
+    // Testing that editing an existing user without being logged in does not allow the user to pass the middleware
+    // To edit an existing user you MUST be logged in and be an admin of the system
     describe('PUT /user/', () => {
-        it('Should fail without user authentication', (done) => {
+        it('Should fail to edit an existing user without being logged in.', (done) => {
             let editStudentDetails = {
                 id: '636d14545451a04e72d994b8',
                 firstName: 'Zain',
@@ -264,9 +323,10 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing an unauthorized user edit request
+    // Testing that editing an existing user without having an admin role does not allow the user to pass the middleware
+    // To edit an existing user you MUST be logged in and be an admin of the system
     describe('PUT /user/', () => {
-        it('Should fail without user authentication', (done) => {
+        it('Should fail to edit an existing new user without having an admin role when logged in.', (done) => {
             let editStudentDetails = {
                 id: '636d14545451a04e72d994b8',
                 firstName: 'Zain',
@@ -290,9 +350,10 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing an invalid edit request
+    // Testing that editing an existing user without having a first name field does not allow the user to register a new user
+    // To edit an existing user you MUST be logged in and be an admin of the system
     describe('PUT /user/', () => {
-        it('Should fail without firstName field', (done) => {
+        it('Should fail to edit an existing user when provided an invalid first name.', (done) => {
             let editStudentDetails = {
                 id: '636d14545451a04e72d994b8',
                 firstName: '',
@@ -316,7 +377,8 @@ describe('Testing block /user path', () => {
         })
     });
 
-    // Testing an invalid edit request
+    // Testing that editing an existing user without having a valid ID field does not allow the user to register a new user
+    // To register a new user you MUST be logged in and be an admin of the system
     describe('PUT /user/', () => {
         it('Should fail with invalid student id', (done) => {
             let editStudentDetails = {
@@ -336,30 +398,6 @@ describe('Testing block /user path', () => {
                 res.body.should.be.a('object')
                 res.body.should.have.property('message')
                 res.body.message.should.be.eql('Unauthorized to update this user.');
-
-                done();
-            })
-        })
-    });
-
-    // Testing a successful edit request
-    describe('PUT /user/', () => {
-        it('Should succeed in editing student', (done) => {
-            let editStudentDetails = {
-                id: '636d14545451a04e72d994b8',
-                firstName: 'Zain',
-                lastName: 'Whaid',
-                email: '100205@student.uops.ac.uk',
-                roles: ['Student']
-            }
-
-            chai.request(app)
-            .put('/user/')
-            .set('Authorization', userTokens.adminToken)
-            .send(editStudentDetails)
-            .end((error, res) => {
-                res.should.have.status(200)
-                res.body.should.be.a('object')
 
                 done();
             })

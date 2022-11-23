@@ -17,44 +17,10 @@ const userTokens = {
 // Testing the register controller
 describe('Testing block /register path', () => {
 
-    // Testing an unauthenticated get all registers request
-    describe('GET /register/get/all', () => {
-        it('Should fail without authentication', (done) => {
-
-            chai.request(app)
-            .get('/register/get/all')
-            .end((error, res) => {
-                res.should.have.status(403)
-                res.body.should.be.a('object')
-                res.body.should.have.property('message')
-                res.body.message.should.be.eql('Token invalid. Unauthorized.');
-
-                done();
-            })
-        })
-    });
-
-    // Testing an unauthorized get all registers request
-    describe('GET /register/get/all/', () => {
-        it('Should fail without authorization', (done) => {
-            
-            chai.request(app)
-            .get('/register/get/all')
-            .set('Authorization', userTokens.studentToken)
-            .end((error, res) => {
-                res.should.have.status(403)
-                res.body.should.be.a('object')
-                res.body.should.have.property('message')
-                res.body.message.should.be.eql('User is not authorized to access tutor resources.');
-
-                done();
-            })
-        })
-    });
-
-    // Testing a succesful get all registers request
+    // Testing that retrieving all registers from the database with valid authentication and authorization works as expected
+    // To retrieve all registers you MUST be logged in and be a tutor/module leader of the system
     describe('GET /register/', () => {
-        it('Should succeed', (done) => {
+        it('Should successfully retrieve all registers with valid authentication and authorization.', (done) => {
             
             chai.request(app)
             .get('/register/get/all')
@@ -69,9 +35,10 @@ describe('Testing block /register path', () => {
         })
     });
 
-    // Testing a succesful register activation
+    // Requirement 002 (R002): Testing that activating a register with valid authentication and authorization works as expected
+    // To activate a register you MUST be logged in and be a tutor/module leader of the current register
     describe('PUT /register/', () => {
-        it('Should activate a register', (done) => {
+        it('Requirement 002 (R002): Should activate a register when provided a valid register ID and valid authentication and authorization', (done) => {
             let body = {
                 id: '636d191368882aae23ebae3f'
             }
@@ -89,9 +56,10 @@ describe('Testing block /register path', () => {
         })
     });
 
-    // Testing view cohort attendance
+    // Requirement 003 (R003): Testing that viewing cohort attendance of a register with valid authentication and authorization works as expected
+    // To view cohort attendance of a register you MUST be logged in and be a tutor/module leader of the current register
     describe('GET /register/:id', () => {
-        it('Should return a register', (done) => {
+        it('Requirement 003 (R003): Should view cohort attendance by returning a register object containing the details of who has registered their attendance', (done) => {
             let id = '636d191368882aae23ebae38';
             
             chai.request(app)
@@ -100,6 +68,43 @@ describe('Testing block /register path', () => {
             .end((error, res) => {
                 res.should.have.status(200)
                 res.body.should.be.a('object')
+
+                done();
+            })
+        })
+    });
+
+    // Testing that retrieving all registers from the database without being logged in does not allow the user to pass the middleware
+    // To retrieve all registers you MUST be logged in and be a tutor/module leader of the system
+    describe('GET /register/get/all', () => {
+        it('Should fail to retrieve all registers without being logged in.', (done) => {
+
+            chai.request(app)
+            .get('/register/get/all')
+            .end((error, res) => {
+                res.should.have.status(403)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('Token invalid. Unauthorized.');
+
+                done();
+            })
+        })
+    });
+
+    // Testing that retrieving all registers from the database without having a tutor/module leader role does not allow the user to pass the middleware
+    // To retrieve all registers you MUST be logged in and be a tutor/module leader of the system
+    describe('GET /register/get/all/', () => {
+        it('Should fail to retrieve all registers without having a role of tutor/module leader.', (done) => {
+            
+            chai.request(app)
+            .get('/register/get/all')
+            .set('Authorization', userTokens.studentToken)
+            .end((error, res) => {
+                res.should.have.status(403)
+                res.body.should.be.a('object')
+                res.body.should.have.property('message')
+                res.body.message.should.be.eql('User is not authorized to access tutor resources.');
 
                 done();
             })

@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 // Testing the role controller
 describe('Testing block /role path', () => {
     
-    // Testing the get all roles request
+    // Testing that the system returns an array of roles
     describe('GET /role', () => {
         it('Should return an array of roles', (done) => {
             
