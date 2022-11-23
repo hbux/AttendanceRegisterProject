@@ -14,25 +14,25 @@
                 <div class="card-body row">
                     <div class="mb-3 col-6">
                         <label for="firstName" class="form-label">First name</label>
-                        <input v-model="firstName" type="text" name="firstName" class="form-control" id="firstName">
+                        <input v-model="firstName" type="text" name="firstName" class="form-control" id="firstName" required>
                     </div>
                     <div class="mb-3 col-6">
                         <label for="lastName" class="form-label">Last name</label>
-                        <input v-model="lastName" type="text" name="lastName" class="form-control" id="lastName">
+                        <input v-model="lastName" type="text" name="lastName" class="form-control" id="lastName" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input v-model="email" type="email" name="email" class="form-control" id="email"
+                        <input v-model="email" type="email" name="email" class="form-control" id="email" required
                             aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3 col-12">
                         <label for="password" class="form-label">Password</label>
-                        <input v-model="password" type="password" name="password" class="form-control" id="password">
+                        <input v-model="password" type="password" name="password" class="form-control" id="password" required>
                     </div>
                     <div class="mb-3 col-12">
                         <label for="confirmPassword" class="form-label">Confirm password</label>
-                        <input v-model="confirmPassword" type="password" name="confirmPassword" class="form-control"
+                        <input v-model="confirmPassword" type="password" name="confirmPassword" class="form-control" required
                             id="confirmPassword">
                     </div>
                     <div class="my-3">

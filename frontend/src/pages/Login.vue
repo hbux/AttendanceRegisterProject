@@ -12,6 +12,9 @@
                         <div v-if="errorMessage" class="alert alert-danger" role="alert">
                             <strong>Oops!</strong> {{ errorMessage }}
                         </div>
+                        <div v-if="isAuthenticated" class="alert alert-danger" role="alert">
+                            <strong>Oops!</strong> You are already logged in!
+                        </div>
                         <div class="card border-0">
                             <div class="d-none card-header py-2" style="font-size: 2rem">
                                 Login to your account
@@ -20,15 +23,23 @@
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
                                     <input v-model="email" type="email" name="email" class="form-control" id="email"
-                                        aria-describedby="emailHelp">
+                                        aria-describedby="emailHelp" required>
                                 </div>
                                 <div class="mb-3 col-12">
                                     <label for="password" class="form-label">Password</label>
-                                    <input v-model="password" type="password" name="password" class="form-control"
+                                    <input v-model="password" required type="password" name="password" class="form-control"
                                         id="password">
                                 </div>
                                 <div class="d-grid gap-2 col-12 mt-2">
-                                    <button class="btn btn-primary p-3" type="submit">
+                                    <button v-if="isAuthenticated == false" class="btn btn-primary p-3" type="submit">
+                                        <div v-if="isLoading" class="spinner-border text-light" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <div v-else class="text-center">
+                                            Login
+                                        </div>
+                                    </button>
+                                    <button v-else class="btn btn-primary p-3" disabled>
                                         <div v-if="isLoading" class="spinner-border text-light" role="status">
                                             <span class="visually-hidden">Loading...</span>
                                         </div>

@@ -18,7 +18,7 @@
                         <div class="mb-3 col-12">
                             <!--label for="code" class="form-label">Registration code</label-->
                             <input v-model="code" type="text" name="password" class="form-control p-3" id="code"
-                                placeholder="Registration Code..">
+                                placeholder="Registration Code.." required>
                             <div id="codeHelpBlock" class="form-text ps-3">
                                 Registration code can only contain numbers
                             </div>

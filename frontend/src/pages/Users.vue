@@ -47,15 +47,15 @@
                         <div class="row g-3 mb-5">
                             <div class="col-sm-6">
                                 <label for="firstName" class="form-label">First name</label>
-                                <input v-model="modal.firstName" type="text" class="form-control" id="firstName">
+                                <input v-model="modal.firstName" type="text" class="form-control" id="firstName" required>
                             </div>
                             <div class="col-sm-6">
                                 <label for="lastName" class="form-label">Last name</label>
-                                <input v-model="modal.lastName" type="text" class="form-control" id="lastName">
+                                <input v-model="modal.lastName" type="text" class="form-control" id="lastName" required>
                             </div>
                             <div class="col-12">
                                 <label for="email" class="form-label">Email</label>
-                                <input v-model="modal.email" type="email" class="form-control" id="lastName">
+                                <input v-model="modal.email" type="email" class="form-control" id="lastName" required>
                             </div>
                             <div class="col-12">
                                 <label for="password" class="form-label">Role of user</label>
