@@ -93,6 +93,10 @@ To run the server and client correctly, follow these steps:
 
 1. Select the backend terminal
     1. Enter `node app.js` to run the program
+2. In the event that the server fails to connect to the database, please try:
+    1. Navigate to the file `config > keys.js`
+    2. Inside this file, replace the MongoDB connection string with `mongodb://127.0.0.1:27017/attendance` or `mongodb://localhost:27017/attendance`
+    3. Attempt to restart the server
     
 ### Client
 
